@@ -20,7 +20,6 @@ import { Link } from '@tanstack/react-router'
 import {
   Activity,
   ArrowRight,
-  BookOpen,
   CheckCircle2,
   Copy,
   KeyRound,
@@ -31,7 +30,6 @@ import {
   WalletCards,
 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { useStatus } from '@/hooks/use-status'
 import { Button } from '@/components/ui/button'
 
 interface HeroProps {
@@ -47,29 +45,6 @@ const modelRows = [
 
 export function Hero(props: HeroProps) {
   const { t } = useTranslation()
-  const { status } = useStatus()
-  const docsUrl =
-    (status?.docs_link as string | undefined) || 'https://supchuang.com'
-
-  const docsButton = docsUrl.startsWith('http') ? (
-    <Button
-      variant='outline'
-      className='h-10 rounded-lg px-4 text-sm'
-      render={<a href={docsUrl} target='_blank' rel='noopener noreferrer' />}
-    >
-      <BookOpen className='size-4' />
-      {t('Docs')}
-    </Button>
-  ) : (
-    <Button
-      variant='outline'
-      className='h-10 rounded-lg px-4 text-sm'
-      render={<Link to={docsUrl} />}
-    >
-      <BookOpen className='size-4' />
-      {t('Docs')}
-    </Button>
-  )
 
   return (
     <section className='relative z-10 border-b px-4 pt-16 pb-10 md:px-6 md:pt-22 md:pb-14'>
@@ -110,7 +85,6 @@ export function Hero(props: HeroProps) {
             >
               {t('查看模型价格')}
             </Button>
-            {docsButton}
           </div>
 
           <div className='mt-8 grid max-w-xl gap-3 sm:grid-cols-3'>
