@@ -155,7 +155,7 @@ export function Hero(props: HeroProps) {
               <div className='rounded-lg border bg-muted/30 p-3 font-mono text-xs'>
                 <div className='text-muted-foreground'>BASE_URL</div>
                 <div className='mt-1 break-all text-foreground'>
-                  https://api.supchuang.com/v1
+                  https://supchuang.com/v1
                 </div>
               </div>
 
