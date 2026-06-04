@@ -123,7 +123,7 @@ function Checklist({ items }: { items: string[] }) {
     <div className='grid gap-3'>
       {items.map((item) => (
         <div key={item} className='flex gap-3 text-sm leading-6'>
-          <CheckCircle2 className='mt-1 size-4 shrink-0 text-emerald-500' />
+          <CheckCircle2 className='mt-1 size-4 shrink-0 text-accent' />
           <span>{item}</span>
         </div>
       ))}
@@ -375,7 +375,7 @@ export function DocsCenter() {
                       onClick={() => setActive(doc.id)}
                       className={`rounded-lg border p-4 text-left transition-colors ${
                         isActive
-                          ? 'border-foreground bg-foreground text-background'
+                          ? 'border-primary bg-primary text-primary-foreground shadow-[0_12px_34px_-20px_color-mix(in_oklch,var(--primary)_80%,transparent)]'
                           : 'bg-background hover:bg-muted/30'
                       }`}
                     >
@@ -385,7 +385,7 @@ export function DocsCenter() {
                       </div>
                       <p
                         className={`mt-1 text-xs ${
-                          isActive ? 'text-background/75' : 'text-muted-foreground'
+                          isActive ? 'text-primary-foreground/75' : 'text-muted-foreground'
                         }`}
                       >
                         {doc.desc}

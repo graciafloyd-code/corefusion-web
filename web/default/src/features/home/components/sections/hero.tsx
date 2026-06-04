@@ -47,11 +47,12 @@ export function Hero(props: HeroProps) {
   const { t } = useTranslation()
 
   return (
-    <section className='relative z-10 border-b px-4 pt-16 pb-10 md:px-6 md:pt-22 md:pb-14'>
+    <section className='relative z-10 overflow-hidden border-b px-4 pt-16 pb-10 md:px-6 md:pt-22 md:pb-14'>
+      <div className='pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_46%_at_50%_0%,color-mix(in_oklch,var(--primary)_24%,transparent),transparent_72%)]' />
       <div className='mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(560px,1.08fr)] lg:items-center'>
         <div className='max-w-2xl'>
           <div className='mb-5 inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 text-xs font-medium text-muted-foreground shadow-sm'>
-            <span className='flex size-2 rounded-full bg-emerald-500' />
+            <span className='flex size-2 rounded-full bg-accent shadow-[0_0_14px_color-mix(in_oklch,var(--accent)_80%,transparent)]' />
             {t('OpenAI-compatible gateway for token relay operations')}
           </div>
 
@@ -112,7 +113,7 @@ export function Hero(props: HeroProps) {
                 {t('实时路由、余额和模型可用性')}
               </div>
             </div>
-            <div className='inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-600 dark:text-emerald-400'>
+            <div className='inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-2.5 py-1 text-xs font-medium text-accent'>
               <Activity className='size-3.5' />
               99.9%
             </div>
@@ -151,12 +152,12 @@ export function Hero(props: HeroProps) {
             <div className='bg-background p-4'>
               <div className='mb-3 grid grid-cols-2 gap-3'>
                 <div className='rounded-lg border p-3'>
-                  <KeyRound className='mb-2 size-4 text-blue-500' />
+                  <KeyRound className='mb-2 size-4 text-primary' />
                   <div className='text-xl font-semibold'>3</div>
                   <div className='text-xs text-muted-foreground'>{t('分销商 Key')}</div>
                 </div>
                 <div className='rounded-lg border p-3'>
-                  <LineChart className='mb-2 size-4 text-teal-500' />
+                  <LineChart className='mb-2 size-4 text-accent' />
                   <div className='text-xl font-semibold'>13ms</div>
                   <div className='text-xs text-muted-foreground'>{t('路由耗时')}</div>
                 </div>
@@ -177,7 +178,7 @@ export function Hero(props: HeroProps) {
                       <div className='text-right'>
                         <div className='text-xs font-medium'>{row.price}</div>
                         <div className='inline-flex items-center gap-1 text-[11px] text-muted-foreground'>
-                          <CheckCircle2 className='size-3 text-emerald-500' />
+                          <CheckCircle2 className='size-3 text-accent' />
                           {row.state}
                         </div>
                       </div>

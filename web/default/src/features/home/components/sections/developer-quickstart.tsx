@@ -62,7 +62,7 @@ export function DeveloperQuickstart() {
           <div className='mt-6 grid gap-3'>
             {checks.map((item) => (
               <div key={item} className='flex items-center gap-3 text-sm'>
-                <CheckCircle2 className='size-4 text-emerald-500' />
+                <CheckCircle2 className='size-4 text-accent' />
                 <span>{item}</span>
               </div>
             ))}
