@@ -29,6 +29,7 @@ interface CockpitHomeProps {
 
 const navItems = [
   { label: '产品能力', href: '#capabilities' },
+  { label: '智能体', href: '#agents' },
   { label: '技术架构', href: '#architecture' },
   { label: '应用场景', href: '#usecases' },
   { label: '为什么选择', href: '#why' },
@@ -51,45 +52,72 @@ type AnnouncementItem = {
 const capabilities = [
   {
     num: 'CAPABILITY 01',
-    title: '异构算力纳管',
-    desc: '统一接入公有云、私有云、IDC、边缘节点与独立 GPU 资源，将 NVIDIA、昇腾、寒武纪等不同硬件抽象为可调度资源池。',
-    points: ['多云与本地集群统一视图', 'GPU / NPU / CPU 资源画像', '镜像、环境、权限与账单联动'],
+    title: '模型与算力统一纳管',
+    desc: '统一接入公有云、私有云、IDC、边缘节点、独立 GPU 资源与多模型供应商，将异构硬件、模型能力和调用入口抽象为统一服务目录。',
+    points: ['多云与本地集群统一视图', 'GPU / NPU / CPU 资源画像', '模型供应商、渠道、密钥集中管理', '按租户、分组、模型范围配置可用能力'],
   },
   {
     num: 'CAPABILITY 02',
-    title: '智能调度编排',
-    desc: '围绕训练、推理、批处理和在线服务建立作业队列，根据成本、显存、拓扑、优先级与 SLA 自动选择最合适的算力位置。',
-    points: ['队列优先级与配额控制', '成本感知与闲置资源复用', '故障迁移、重试与自愈'],
+    title: '请求路由与调度编排',
+    desc: '围绕训练、推理、批处理、Agent 调用和在线服务建立统一调度策略，根据成本、上下文长度、模型能力、优先级与 SLA 自动选择执行路径。',
+    points: ['队列优先级与配额控制', '模型路由、故障切换与重试', '成本感知与闲置资源复用', '限流、熔断、黑白名单与异常识别'],
   },
   {
     num: 'CAPABILITY 03',
-    title: '算网融合加速',
-    desc: '把网络延迟、带宽、地域、链路质量纳入调度判断，适合跨地域推理、分布式训练、边云协同和高并发 API 服务。',
-    points: ['网络拓扑感知调度', '就近接入与链路优选', '吞吐、延迟、错误率持续观测'],
+    title: '商业化运营控制',
+    desc: '面向主站、OEM 与分销商建立可计量、可审计、可交付的运营体系，将底层模型与算力包装为可售卖的 API、套餐和行业解决方案。',
+    points: ['额度、倍率、利润与批发价配置', '分销商 Token 与独立 OEM 实例', '调用日志、账单、异常消耗审计', '公告、文档、售后规则与交付模板'],
+  },
+]
+
+const agentCapabilities = [
+  {
+    label: 'Skill Registry',
+    title: '技能库与能力包',
+    desc: '将提示词模板、工具调用、业务规则、脚本动作和交付流程封装为可复用 Skill，便于在不同客户、分销商和行业场景中复用。',
+    bullets: ['提示词与系统指令版本管理', '工具/API 调用参数规范化', '交付模板、售后规则、行业话术沉淀'],
+  },
+  {
+    label: 'Agent Workflow',
+    title: 'Agent 工作流编排',
+    desc: '支持把模型、知识库、外部工具和审批节点组合为多步骤流程，让客服、销售、技术支持和运营任务可以被标准化执行。',
+    bullets: ['多步骤任务拆解与状态追踪', '人工确认、权限校验和失败回退', '面向 API、网页表单、企业微信等入口扩展'],
+  },
+  {
+    label: 'Knowledge & RAG',
+    title: '知识库与检索增强',
+    desc: '将产品文档、价格表、分销规则、模型说明和售后政策接入知识库，使 Agent 可以基于可信资料回答与执行。',
+    bullets: ['文档分段、索引和引用追踪', '按租户隔离知识资产', '减少幻觉并提升售前售后响应一致性'],
+  },
+  {
+    label: 'Observability',
+    title: '可观测与治理',
+    desc: '对 Agent 的模型调用、工具调用、Token 消耗、失败原因和用户反馈进行记录，为计费、优化和风控提供依据。',
+    bullets: ['调用链路与成本归因', '敏感操作审计与权限边界', '按客户、渠道、场景输出运营报表'],
   },
 ]
 
 const layers = [
   {
     layer: 'Layer 04',
-    title: '应用场景层',
-    desc: '面向模型训练、在线推理、科学计算、自动驾驶仿真、金融风控等业务提供统一入口。',
+    title: '应用与 Agent 层',
+    desc: '面向模型调用、智能客服、企业知识助手、批量内容处理、自动化运营和行业解决方案提供统一入口。',
     tone: '',
-    details: ['API 服务', 'Notebook / Workbench', '批量作业', '行业模板'],
+    details: ['API 服务', 'Agent 应用', 'Skill 模板', '行业工作流'],
   },
   {
     layer: 'Layer 03',
     title: '服务使能层',
-    desc: '提供模型服务、任务编排、用户与租户管理、用量计费、运营报表和开发者接入能力。',
+    desc: '提供模型服务、任务编排、知识库检索、用户与租户管理、用量计费、运营报表和开发者接入能力。',
     tone: 'l3',
-    details: ['OpenAI 兼容网关', '多租户权限', '计费倍率', '运营看板'],
+    details: ['OpenAI 兼容网关', 'RAG 检索', '多租户权限', '运营看板'],
   },
   {
     layer: 'Layer 02',
     title: '平台核心层',
-    desc: '调度引擎基于资源画像、队列策略、网络状态、成本约束和服务优先级完成自动编排。',
+    desc: '调度引擎基于资源画像、模型能力、队列策略、网络状态、成本约束和服务优先级完成自动编排。',
     tone: 'l2',
-    details: ['资源画像', '队列调度', '故障自愈', '成本优化'],
+    details: ['模型路由', '队列调度', '故障自愈', '成本优化'],
   },
   {
     layer: 'Layer 01',
@@ -104,8 +132,14 @@ const useCases = [
   {
     tag: 'AI / LLM',
     title: 'AI 模型研发与推理服务',
-    desc: '研发团队可按项目申请 GPU 配额，训练任务走队列调度，推理服务走低延迟网关，统一查看成本、吞吐和错误率。',
-    outcome: '适合模型训练、微调、批量推理和 API 商业化。',
+    desc: '研发团队可按项目申请 GPU 配额，训练任务走队列调度，推理服务走低延迟网关，统一查看成本、吞吐、错误率和模型表现。',
+    outcome: '适合模型训练、微调、批量推理、模型 API 商业化。',
+  },
+  {
+    tag: 'AGENT OPS',
+    title: '企业 Agent 与 Skill 运营',
+    desc: '将客服、售前、文档问答、数据处理和交付流程拆解为可复用 Skill，并通过 Agent 工作流连接模型、知识库和业务系统。',
+    outcome: '适合构建企业知识助手、分销商客服、自动化售前和运营 Copilot。',
   },
   {
     tag: 'GPUAAS',
@@ -138,6 +172,7 @@ const tasks = [
 const consoleTabs = [
   ['总览', '#top'],
   ['资源池', '#capabilities'],
+  ['智能体', '#agents'],
   ['任务调度', '#architecture'],
   ['网络', '#usecases'],
 ]
@@ -414,8 +449,8 @@ export function CockpitHome(props: CockpitHomeProps) {
 
         <section className='cf-section cf-wrap' id='capabilities'>
           <p className='cf-eyebrow'>Core Capabilities</p>
-          <h2 className='cf-h2'>三大核心能力，破解算力孤岛</h2>
-          <p className='cf-lead' style={{ marginTop: 18 }}>定位为「算力电网」而非「算力房东」——中立、可调度、跨架构，让分散算力汇成统一资源池。</p>
+          <h2 className='cf-h2'>三大核心能力，支撑模型中转与算力运营</h2>
+          <p className='cf-lead' style={{ marginTop: 18 }}>平台定位为面向 AI 服务商、智算资源方与分销商的统一控制面：向下连接模型与算力，向上交付 API、Agent、OEM 与行业应用。</p>
           <div className='cf-cap-grid'>
             {capabilities.map((item) => (
               <article className='cf-cap' key={item.num}>
@@ -427,6 +462,32 @@ export function CockpitHome(props: CockpitHomeProps) {
                   {item.points.map((point) => <li key={point}>{point}</li>)}
                 </ul>
               </article>
+            ))}
+          </div>
+        </section>
+
+        <section className='cf-section cf-wrap' id='agents'>
+          <p className='cf-eyebrow'>Skill / Agent Orchestration</p>
+          <h2 className='cf-h2'>把模型能力封装为可复用的 Skill 与 Agent 工作流</h2>
+          <p className='cf-lead' style={{ marginTop: 18 }}>在模型网关之上沉淀技能库、知识库和流程编排能力，让分销商和企业客户不仅能调用模型，也能交付可运营、可审计、可迭代的智能体服务。</p>
+          <div className='cf-agent-grid'>
+            {agentCapabilities.map((item) => (
+              <article className='cf-agent-card' key={item.label}>
+                <div className='cf-agent-label'>{item.label}</div>
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+                <ul>
+                  {item.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+                </ul>
+              </article>
+            ))}
+          </div>
+          <div className='cf-agent-flow' aria-label='Skill 与 Agent 使用流程'>
+            {['业务场景', 'Skill 能力包', 'Agent 工作流', '模型与工具调用', '审计与计费'].map((step, index) => (
+              <div className='cf-agent-step' key={step}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <strong>{step}</strong>
+              </div>
             ))}
           </div>
         </section>

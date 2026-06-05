@@ -797,6 +797,105 @@
   width: 6px;
 }
 
+.cf-agent-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: clamp(40px, 5vw, 58px);
+}
+
+.cf-agent-card {
+  background: linear-gradient(180deg, var(--cf-surface-2), var(--cf-surface));
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-r-lg);
+  box-shadow: var(--cf-card-shadow);
+  min-width: 0;
+  padding: 28px 24px;
+}
+
+.cf-agent-label {
+  color: var(--cf-accent-text);
+  font-family: var(--cf-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cf-agent-card h3 {
+  color: var(--cf-heading);
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin: 14px 0 12px;
+}
+
+.cf-agent-card p {
+  color: var(--cf-text-2);
+  font-size: 13.5px;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.cf-agent-card ul {
+  display: grid;
+  gap: 9px;
+  margin: 20px 0 0;
+}
+
+.cf-agent-card li {
+  color: var(--cf-text);
+  font-size: 13px;
+  line-height: 1.5;
+  padding-left: 18px;
+  position: relative;
+}
+
+.cf-agent-card li::before {
+  background: var(--cf-brand-soft);
+  border-radius: 2px;
+  content: '';
+  height: 6px;
+  left: 0;
+  position: absolute;
+  top: 0.55em;
+  width: 6px;
+}
+
+.cf-agent-flow {
+  align-items: stretch;
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-r-lg);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.cf-agent-step {
+  background: var(--cf-surface);
+  min-width: 0;
+  padding: 18px 20px;
+}
+
+.cf-agent-step + .cf-agent-step {
+  border-left: 1px solid var(--cf-border);
+}
+
+.cf-agent-step span {
+  color: var(--cf-accent-text);
+  display: block;
+  font-family: var(--cf-mono);
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+.cf-agent-step strong {
+  color: var(--cf-heading);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
 .cf-arch {
   display: flex;
   flex-direction: column;
@@ -1129,6 +1228,16 @@
   .cf-footer-top {
     grid-template-columns: 1fr 1fr;
   }
+
+  .cf-agent-grid,
+  .cf-agent-flow {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cf-agent-step + .cf-agent-step {
+    border-left: 0;
+    border-top: 1px solid var(--cf-border);
+  }
 }
 
 @media (max-width: 860px) {
@@ -1154,7 +1263,8 @@
     grid-column: auto;
   }
 
-  .cf-use-grid {
+  .cf-use-grid,
+  .cf-agent-grid {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -1199,6 +1309,8 @@
 }
 
 @media (max-width: 560px) {
+  .cf-agent-grid,
+  .cf-agent-flow,
   .cf-use-grid,
   .cf-live-grid,
   .cf-footer-top {
