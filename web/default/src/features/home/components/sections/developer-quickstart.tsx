@@ -50,7 +50,7 @@ export function DeveloperQuickstart() {
           <p className='mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground'>
             {t('Distributor quick start')}
           </p>
-          <h2 className='text-2xl font-semibold tracking-tight md:text-3xl'>
+          <h2 className='text-2xl font-semibold md:text-3xl'>
             {t('5 分钟把下游请求接入你的主站')}
           </h2>
           <p className='mt-4 max-w-xl text-sm leading-6 text-muted-foreground'>

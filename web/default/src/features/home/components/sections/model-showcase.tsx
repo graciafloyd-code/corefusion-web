@@ -21,41 +21,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from '@tanstack/react-router'
 import { AnimateInView } from '@/components/animate-in-view'
 import { Button } from '@/components/ui/button'
-
-const models = [
-  {
-    name: 'deepseek-v4-pro',
-    vendor: 'DeepSeek',
-    in: 'Text',
-    out: 'Text',
-    context: '128K',
-    price: '主推供货',
-  },
-  {
-    name: 'gpt-4o-mini',
-    vendor: 'OpenAI',
-    in: 'Text / Vision',
-    out: 'Text',
-    context: '128K',
-    price: '低成本转售',
-  },
-  {
-    name: 'claude-sonnet-4',
-    vendor: 'Anthropic',
-    in: 'Text / Vision',
-    out: 'Text',
-    context: '200K',
-    price: '高端套餐',
-  },
-  {
-    name: 'qwen-plus',
-    vendor: 'Qwen',
-    in: 'Text',
-    out: 'Text',
-    context: '128K',
-    price: '中文场景',
-  },
-]
+import { modelSupplyRows } from '../../home-data'
 
 export function ModelShowcase() {
   const { t } = useTranslation()
@@ -66,10 +32,10 @@ export function ModelShowcase() {
         <AnimateInView className='mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end'>
           <div>
             <p className='mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground'>
-              {t('Model supply')}
+            {t('Model supply and margin')}
             </p>
-            <h2 className='text-2xl font-semibold tracking-tight md:text-3xl'>
-              {t('把可售模型、权限和价格透明展示给客户')}
+            <h2 className='text-2xl font-semibold md:text-3xl'>
+              {t('模型售价、批发倍率和利润空间一眼看清')}
             </h2>
           </div>
           <div className='flex gap-2'>
@@ -85,7 +51,7 @@ export function ModelShowcase() {
         </AnimateInView>
 
         <div className='grid gap-px overflow-hidden rounded-xl border bg-border md:grid-cols-2 xl:grid-cols-4'>
-          {models.map((model, index) => (
+          {modelSupplyRows.map((model, index) => (
             <AnimateInView
               key={model.name}
               delay={index * 50}
@@ -95,10 +61,12 @@ export function ModelShowcase() {
               <div className='mb-4 flex items-start justify-between gap-3'>
                 <div className='min-w-0'>
                   <h3 className='truncate text-sm font-semibold'>{model.name}</h3>
-                  <p className='mt-1 text-xs text-muted-foreground'>{model.vendor}</p>
+                  <p className='mt-1 text-xs text-muted-foreground'>
+                    {model.vendor} · {model.scenario}
+                  </p>
                 </div>
                 <span className='rounded-md border bg-muted/30 px-2 py-1 text-[11px] text-muted-foreground'>
-                  {model.price}
+                  {model.retail}
                 </span>
               </div>
 
@@ -106,23 +74,23 @@ export function ModelShowcase() {
                 <div className='flex items-center justify-between rounded-lg border bg-muted/20 px-3 py-2'>
                   <span className='flex items-center gap-2 text-muted-foreground'>
                     <Boxes className='size-3.5' />
-                    {t('Input')}
+                    {t('售价')}
                   </span>
-                  <span className='font-medium'>{model.in}</span>
+                  <span className='font-medium'>{model.retail}</span>
                 </div>
                 <div className='flex items-center justify-between rounded-lg border bg-muted/20 px-3 py-2'>
                   <span className='flex items-center gap-2 text-muted-foreground'>
                     <BadgeDollarSign className='size-3.5' />
-                    {t('Output')}
+                    {t('批发倍率')}
                   </span>
-                  <span className='font-medium'>{model.out}</span>
+                  <span className='font-medium'>{model.groups}</span>
                 </div>
                 <div className='flex items-center justify-between rounded-lg border bg-muted/20 px-3 py-2'>
                   <span className='flex items-center gap-2 text-muted-foreground'>
                     <Gauge className='size-3.5' />
-                    {t('Context')}
+                    {t('用途')}
                   </span>
-                  <span className='font-medium'>{model.context}</span>
+                  <span className='font-medium'>{model.scenario}</span>
                 </div>
               </div>
             </AnimateInView>

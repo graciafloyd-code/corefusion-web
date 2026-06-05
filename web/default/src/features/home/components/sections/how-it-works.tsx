@@ -58,7 +58,7 @@ export function HowItWorks() {
             <p className='mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground'>
               {t('Wholesale flow')}
             </p>
-            <h2 className='text-2xl font-semibold tracking-tight md:text-3xl'>
+            <h2 className='text-2xl font-semibold md:text-3xl'>
               {t('四步完成 Token 批发供货')}
             </h2>
           </div>

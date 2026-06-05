@@ -63,7 +63,7 @@ export function Enterprise() {
           <p className='mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground'>
             {t('Wholesale and OEM')}
           </p>
-          <h2 className='text-2xl font-semibold tracking-tight md:text-3xl'>
+          <h2 className='text-2xl font-semibold md:text-3xl'>
             {t('面向 Token 批发和 OEM 分销的运营控制台')}
           </h2>
           <p className='mt-4 text-sm leading-6 text-muted-foreground'>

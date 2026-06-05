@@ -94,7 +94,7 @@ export function Features(_props: FeaturesProps) {
           <p className='mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground'>
             {t('Token relay essentials')}
           </p>
-          <h2 className='text-2xl font-semibold tracking-tight md:whitespace-nowrap md:text-3xl'>
+          <h2 className='text-2xl font-semibold md:whitespace-nowrap md:text-3xl'>
             {t('从 Token 发放、模型分销到消耗结算，都在一个后台里完成')}
           </h2>
         </AnimateInView>

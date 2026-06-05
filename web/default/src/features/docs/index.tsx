@@ -22,7 +22,6 @@ import {
   BookOpen,
   Braces,
   CheckCircle2,
-  CreditCard,
   FileText,
   KeyRound,
   LifeBuoy,

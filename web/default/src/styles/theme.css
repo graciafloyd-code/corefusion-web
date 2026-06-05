@@ -90,7 +90,8 @@ For commercial licensing, please contact support@quantumnous.com
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-:root {
+:root,
+[data-theme='light'] {
   --radius: 1rem;
   --app-header-height: 3rem;
   --brand-space: #0C1830;
@@ -145,9 +146,14 @@ For commercial licensing, please contact support@quantumnous.com
   --sidebar-ring: #1f57f8;
   --skeleton-base: #eef3fb;
   --skeleton-highlight: #ffffff;
+  --home-page: #f7f9ff;
+  --home-section: #eef3fb;
+  --home-text: #0c1830;
+  --home-soft-border: color-mix(in oklch, #0c1830 12%, transparent);
 }
 
-.dark {
+.dark,
+[data-theme='dark'] {
   --background: #0c1830;
   --foreground: #f7fbff;
   --card: #101f3c;
@@ -190,4 +196,8 @@ For commercial licensing, please contact support@quantumnous.com
   --sidebar-ring: #1f57f8;
   --skeleton-base: #142644;
   --skeleton-highlight: #1b2e50;
+  --home-page: #0c1830;
+  --home-section: #101f3c;
+  --home-text: #f7fbff;
+  --home-soft-border: color-mix(in oklch, #ffffff 11%, transparent);
 }

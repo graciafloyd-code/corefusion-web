@@ -70,7 +70,7 @@ export function Home() {
   }
 
   return (
-    <PublicLayout showMainContainer={false}>
+    <PublicLayout showHeader={false} showMainContainer={false}>
       <Hero isAuthenticated={isAuthenticated} />
       <Stats />
       <ModelShowcase />

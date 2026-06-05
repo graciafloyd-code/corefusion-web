@@ -17,6 +17,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 import { useTranslation } from 'react-i18next'
+import { valueCards } from '../../home-data'
 
 interface StatsProps {
   className?: string
@@ -25,20 +26,13 @@ interface StatsProps {
 export function Stats(_props: StatsProps) {
   const { t } = useTranslation()
 
-  const stats = [
-    { value: '1', label: t('统一 API 入口'), detail: 'https://supchuang.com/v1' },
-    { value: '40+', label: t('可售模型资源'), detail: 'DeepSeek / OpenAI / Claude' },
-    { value: '3', label: t('批发价分组'), detail: 'standard / pro / strategic' },
-    { value: '100%', label: t('消耗可对账'), detail: 'token / model / cost' },
-  ]
-
   return (
-    <section className='border-b bg-muted/15 px-4 py-5 md:px-6'>
+    <section className='border-b bg-[var(--home-section)] px-4 py-5 md:px-6'>
       <div className='mx-auto grid max-w-7xl gap-px overflow-hidden rounded-xl border bg-border sm:grid-cols-2 lg:grid-cols-4'>
-        {stats.map((stat) => (
+        {valueCards.map((stat) => (
           <div key={stat.label} className='bg-background px-5 py-4'>
-            <div className='text-2xl font-semibold tracking-tight'>{stat.value}</div>
-            <div className='mt-1 text-sm font-medium'>{stat.label}</div>
+            <div className='text-2xl font-semibold'>{stat.value}</div>
+            <div className='mt-1 text-sm font-medium'>{t(stat.label)}</div>
             <div className='mt-1 font-mono text-[11px] text-muted-foreground'>
               {stat.detail}
             </div>
