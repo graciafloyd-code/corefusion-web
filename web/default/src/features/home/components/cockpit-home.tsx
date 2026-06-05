@@ -31,7 +31,6 @@ const navItems = [
   { label: '产品矩阵', href: '#products' },
   { label: '模型服务', href: '#capabilities' },
   { label: '分销运营', href: '#live-config' },
-  { label: '技术架构', href: '#architecture' },
   { label: '文档', href: '/docs' },
 ]
 
@@ -127,70 +126,6 @@ const agentCapabilities = [
   },
 ]
 
-const layers = [
-  {
-    layer: 'Layer 04',
-    title: '应用与 Agent 层',
-    desc: '面向模型调用、智能客服、企业知识助手、批量内容处理、自动化运营和行业解决方案提供统一入口。',
-    tone: '',
-    details: ['API 服务', 'Agent 应用', 'Skill 模板', '行业工作流'],
-  },
-  {
-    layer: 'Layer 03',
-    title: '服务使能层',
-    desc: '提供模型服务、任务编排、知识库检索、用户与租户管理、用量计费、运营报表和开发者接入能力。',
-    tone: 'l3',
-    details: ['OpenAI 兼容网关', 'RAG 检索', '多租户权限', '运营看板'],
-  },
-  {
-    layer: 'Layer 02',
-    title: '平台核心层',
-    desc: '调度引擎基于资源画像、模型能力、队列策略、网络状态、成本约束和服务优先级完成自动编排。',
-    tone: 'l2',
-    details: ['模型路由', '队列调度', '故障自愈', '成本优化'],
-  },
-  {
-    layer: 'Layer 01',
-    title: '资源接入层',
-    desc: '向下连接 Kubernetes、裸金属、云厂商、智算中心与边缘节点，形成可运营的统一资源底座。',
-    tone: 'l1',
-    details: ['K8s / IDC', 'GPU / NPU', '镜像仓库', '网络探针'],
-  },
-]
-
-const useCases = [
-  {
-    tag: 'AI / LLM',
-    title: 'AI 模型研发与推理服务',
-    desc: '研发团队可按项目申请 GPU 配额，训练任务走队列调度，推理服务走低延迟网关，统一查看成本、吞吐、错误率和模型表现。',
-    outcome: '适合模型训练、微调、批量推理、模型 API 商业化。',
-  },
-  {
-    tag: 'AGENT OPS',
-    title: '企业 Agent 与 Skill 运营',
-    desc: '将客服、售前、文档问答、数据处理和交付流程拆解为可复用 Skill，并通过 Agent 工作流连接模型、知识库和业务系统。',
-    outcome: '适合构建企业知识助手、分销商客服、自动化售前和运营 Copilot。',
-  },
-  {
-    tag: 'GPUAAS',
-    title: 'GPU 云与分销运营',
-    desc: '将分散 GPU 资源包装成可售卖套餐，支持租户隔离、额度上限、模型范围、批发倍率和分销商 Token 交付。',
-    outcome: '适合智算中心、IDC、云服务商做 GPUaaS / APIaaS。',
-  },
-  {
-    tag: 'HPC / RESEARCH',
-    title: '科研仿真与高性能计算',
-    desc: '面向高校、实验室、药物发现、基因分析和工程仿真，支持批处理队列、环境复现、任务追踪和资源审计。',
-    outcome: '适合长周期批量作业与多团队共享集群。',
-  },
-  {
-    tag: 'EDGE AI',
-    title: '边云协同与行业智能',
-    desc: '在边缘节点处理低延迟任务，在中心云完成模型更新和大规模计算，按网络状态自动选择最优执行位置。',
-    outcome: '适合智慧城市、工业视觉、车路协同和安防分析。',
-  },
-]
-
 const tasks = [
   ['LLM-Pretrain-32T', '运行中', 'run'],
   ['AutoDrive-Sim-04K', '运行中', 'run'],
@@ -203,8 +138,8 @@ const consoleTabs = [
   ['总览', '#top'],
   ['资源池', '#capabilities'],
   ['智能体', '#agents'],
-  ['任务调度', '#architecture'],
-  ['网络', '#usecases'],
+  ['分销运营', '#live-config'],
+  ['文档中心', '/docs'],
 ]
 
 function asArray<T>(value: unknown): T[] {
@@ -597,40 +532,6 @@ export function CockpitHome(props: CockpitHomeProps) {
           </div>
         </section>
 
-        <section className='cf-section cf-wrap' id='architecture'>
-          <p className='cf-eyebrow'>CoreFusion™ Architecture</p>
-          <h2 className='cf-h2'>四层全栈融合架构</h2>
-          <div className='cf-arch'>
-            {layers.map((item) => (
-              <div className={`cf-layer ${item.tone}`} key={item.layer}>
-                <span className='cf-layer-x'>{item.layer}</span>
-                <span className='cf-layer-title'>{item.title}</span>
-                <span className='cf-layer-desc'>
-                  {item.desc}
-                  <span className='cf-layer-tags'>
-                    {item.details.map((detail) => <em key={detail}>{detail}</em>)}
-                  </span>
-                </span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className='cf-section cf-wrap' id='usecases'>
-          <p className='cf-eyebrow'>Use Cases</p>
-          <h2 className='cf-h2'>四大高价值场景</h2>
-          <div className='cf-use-grid'>
-            {useCases.map((item) => (
-              <article className='cf-use-card' key={item.tag}>
-                <div className='cf-use-tag'>{item.tag}</div>
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-                <div className='cf-use-outcome'>{item.outcome}</div>
-              </article>
-            ))}
-          </div>
-        </section>
-
         <section className='cf-section cf-wrap' id='why'>
           <p className='cf-eyebrow'>Why CoreFusion</p>
           <h2 className='cf-h2'>为什么是中科超创？</h2>
@@ -662,7 +563,7 @@ export function CockpitHome(props: CockpitHomeProps) {
           <div className='cf-footer-top'>
             <div><Brand /><p className='cf-footer-desc'>构筑下一代智能算力网络 · 算网融合 · 中立调度中枢。</p></div>
             <div className='cf-footer-col'><h4>产品</h4><a href='#capabilities'>算力调度平台</a><a href={consoleHref}>控制台</a><a href='/docs'>开发者 API</a><a href='/pricing'>定价</a></div>
-            <div className='cf-footer-col'><h4>解决方案</h4><a href='#usecases'>AI 模型研发</a><a href='#usecases'>金融量化</a><a href='#usecases'>自动驾驶</a><a href='#usecases'>智慧城市</a></div>
+            <div className='cf-footer-col'><h4>服务</h4><a href='#products'>模型云服务</a><a href='#capabilities'>模型服务网关</a><a href='#live-config'>分销商运营</a><a href='#agents'>企业 Agent</a></div>
             <div className='cf-footer-col'><h4>公司</h4><a href='/about'>关于我们</a><a href='/docs'>技术博客</a><a href='/docs'>加入我们</a><a href='#cta'>联系销售</a></div>
           </div>
           <div className='cf-footer-bottom'><span>© 2026 中科超创 CoreFusion · 浙江数字内容研究院</span><span className='en'>COREFUSION™ · supchuang.com</span></div>
