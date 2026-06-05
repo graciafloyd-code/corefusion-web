@@ -28,11 +28,11 @@ interface CockpitHomeProps {
 }
 
 const navItems = [
-  { label: '产品能力', href: '#capabilities' },
-  { label: '智能体', href: '#agents' },
+  { label: '产品矩阵', href: '#products' },
+  { label: '模型服务', href: '#capabilities' },
+  { label: '分销运营', href: '#live-config' },
   { label: '技术架构', href: '#architecture' },
-  { label: '应用场景', href: '#usecases' },
-  { label: '为什么选择', href: '#why' },
+  { label: '文档', href: '/docs' },
 ]
 
 type ApiInfoItem = {
@@ -51,23 +51,53 @@ type AnnouncementItem = {
 
 const capabilities = [
   {
-    num: 'CAPABILITY 01',
-    title: '模型与算力统一纳管',
-    desc: '统一接入公有云、私有云、IDC、边缘节点、独立 GPU 资源与多模型供应商，将异构硬件、模型能力和调用入口抽象为统一服务目录。',
-    points: ['多云与本地集群统一视图', 'GPU / NPU / CPU 资源画像', '模型供应商、渠道、密钥集中管理', '按租户、分组、模型范围配置可用能力'],
+    num: 'MODEL API',
+    title: '开箱即用的大模型 API',
+    desc: '面向开发者与分销商提供统一模型调用入口，覆盖文本生成、代码、视觉理解、向量检索和 Agent 工具调用等高频场景。',
+    points: ['OpenAI 兼容协议接入', '多模型统一路由与模型别名', 'Token、分组、模型范围权限控制', '调用日志、错误率与成本归因'],
   },
   {
-    num: 'CAPABILITY 02',
-    title: '请求路由与调度编排',
-    desc: '围绕训练、推理、批处理、Agent 调用和在线服务建立统一调度策略，根据成本、上下文长度、模型能力、优先级与 SLA 自动选择执行路径。',
-    points: ['队列优先级与配额控制', '模型路由、故障切换与重试', '成本感知与闲置资源复用', '限流、熔断、黑白名单与异常识别'],
+    num: 'RELAY ENGINE',
+    title: '模型网关与推理调度',
+    desc: '在上游模型与下游客户之间建立稳定的转发、调度和治理层，按可用性、成本、倍率、额度与策略完成请求分配。',
+    points: ['渠道健康检查与故障切换', '限流、熔断、重试与黑白名单', '按模型、客户、分销商维度计量', '成本感知与利润空间管理'],
   },
   {
-    num: 'CAPABILITY 03',
-    title: '商业化运营控制',
-    desc: '面向主站、OEM 与分销商建立可计量、可审计、可交付的运营体系，将底层模型与算力包装为可售卖的 API、套餐和行业解决方案。',
-    points: ['额度、倍率、利润与批发价配置', '分销商 Token 与独立 OEM 实例', '调用日志、账单、异常消耗审计', '公告、文档、售后规则与交付模板'],
+    num: 'OEM OPS',
+    title: '分销商与 OEM 商业化',
+    desc: '为代理、行业服务商和企业客户提供可交付的 Token、额度、模型范围和批发倍率配置，主站保留密钥、渠道与服务器控制权。',
+    points: ['分销商专属 Token 与额度上限', 'OEM 后台、品牌与文档交付', '批发价、倍率、利润模型管理', '售后规则、交付模板与结算审计'],
   },
+]
+
+const productMatrix = [
+  {
+    title: '模型云服务',
+    desc: '统一聚合 DeepSeek、Qwen、GLM、Claude、GPT 等模型能力，向客户交付稳定的 API 调用、模型列表和额度管理。',
+    meta: 'API / Model / Token',
+  },
+  {
+    title: '模型服务网关',
+    desc: '承接多渠道上游密钥，提供路由、限流、熔断、重试、余额保护和异常消耗识别，适合作为主站核心中转层。',
+    meta: 'Gateway / Routing / Guardrail',
+  },
+  {
+    title: '分销商运营后台',
+    desc: '分销商只拥有运营后台，你掌握部署、渠道、主站 Token、服务器和密钥，业务可交付但核心链路不外泄。',
+    meta: 'OEM / Reseller / Billing',
+  },
+  {
+    title: '企业 Agent 套件',
+    desc: '基于模型 API、知识库、Skill 和工具调用，包装客服、售前、文档问答、内容生产与行业 Copilot 服务。',
+    meta: 'Agent / Skill / RAG',
+  },
+]
+
+const modelCards = [
+  ['DeepSeek V4 Pro', '长上下文 / 代码 / 推理', '标准 · Pro · 战略'],
+  ['Qwen Max / VL', '文本、视觉理解与多语种', '企业常用'],
+  ['GLM 高速版', '低延迟生成与 Agent 任务', '高并发'],
+  ['Embedding / Rerank', '知识库检索增强', 'RAG 基础能力'],
 ]
 
 const agentCapabilities = [
@@ -427,12 +457,43 @@ export function CockpitHome(props: CockpitHomeProps) {
 
       <main id='top'>
         <section className='cf-section cf-hero cf-wrap'>
-          <p className='cf-eyebrow'>CoreFusion™ 智能算力中枢</p>
-          <h1>算力调度，<span>尽在掌握</span></h1>
-          <p className='cf-lead'>面向企业级 AI 与高性能计算场景，统一纳管跨云、跨架构的异构算力资源，构建可调度、可计量、可运营的智能算力中枢。</p>
-          <div className='cf-actions'>
-            <ButtonLink href='#cta' primary>预约演示</ButtonLink>
-            <ButtonLink href='#capabilities'>查看产品 ↗</ButtonLink>
+          <div className='cf-hero-grid'>
+            <div className='cf-hero-copy'>
+              <p className='cf-eyebrow'>COREFUSION MAAS PLATFORM</p>
+              <h1>面向分销与企业客户的 <span>AI 模型服务平台</span></h1>
+              <p className='cf-lead'>统一接入模型 API、Token 额度、分销商 OEM、计费倍率与调用审计，把上游模型能力包装成可售卖、可交付、可持续运营的商业化服务。</p>
+              <div className='cf-actions'>
+                <ButtonLink href={consoleHref} primary>进入控制台</ButtonLink>
+                <ButtonLink href='#products'>查看产品矩阵 ↗</ButtonLink>
+              </div>
+              <div className='cf-hero-metrics'>
+                <span><strong>OpenAI</strong> 兼容协议</span>
+                <span><strong>OEM</strong> 分销交付</span>
+                <span><strong>Billing</strong> 倍率计费</span>
+              </div>
+            </div>
+            <aside className='cf-hero-panel' aria-label='模型服务平台概览'>
+              <div className='cf-panel-head'>
+                <span>Model Service Console</span>
+                <em>LIVE</em>
+              </div>
+              <div className='cf-model-list'>
+                {modelCards.map(([name, desc, tag]) => (
+                  <div className='cf-model-row' key={name}>
+                    <div>
+                      <strong>{name}</strong>
+                      <small>{desc}</small>
+                    </div>
+                    <span>{tag}</span>
+                  </div>
+                ))}
+              </div>
+              <div className='cf-panel-foot'>
+                <div><strong>4</strong><span>运营分组</span></div>
+                <div><strong>1,000+</strong><span>模型与接口</span></div>
+                <div><strong>{live.uptime}</strong><span>运行时间</span></div>
+              </div>
+            </aside>
           </div>
           <ConsoleMockup live={live} />
         </section>
@@ -447,10 +508,26 @@ export function CockpitHome(props: CockpitHomeProps) {
           </div>
         </section>
 
+        <section className='cf-section cf-wrap' id='products'>
+          <p className='cf-eyebrow'>Product Matrix</p>
+          <h2 className='cf-h2'>参照成熟 MaaS 平台的信息架构，重组为四条产品线</h2>
+          <p className='cf-lead' style={{ marginTop: 18 }}>首页不再只讲“算力调度”，而是清晰表达主站可以交付什么：模型 API、服务网关、分销商后台和企业 Agent 能力。</p>
+          <div className='cf-product-grid'>
+            {productMatrix.map((item) => (
+              <article className='cf-product-card' key={item.title}>
+                <span>{item.meta}</span>
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+                <a href={item.title === '企业 Agent 套件' ? '#agents' : '#capabilities'}>了解能力</a>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className='cf-section cf-wrap' id='capabilities'>
           <p className='cf-eyebrow'>Core Capabilities</p>
-          <h2 className='cf-h2'>三大核心能力，支撑模型中转与算力运营</h2>
-          <p className='cf-lead' style={{ marginTop: 18 }}>平台定位为面向 AI 服务商、智算资源方与分销商的统一控制面：向下连接模型与算力，向上交付 API、Agent、OEM 与行业应用。</p>
+          <h2 className='cf-h2'>从模型 API 到渠道治理，支撑商业 Token 中转站</h2>
+          <p className='cf-lead' style={{ marginTop: 18 }}>参考模型云平台常见的信息组织方式，把“模型、网关、计费、OEM”放在用户能快速理解的位置，同时保留你的主站控制权叙事。</p>
           <div className='cf-cap-grid'>
             {capabilities.map((item) => (
               <article className='cf-cap' key={item.num}>
