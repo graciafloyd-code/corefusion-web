@@ -376,11 +376,25 @@
   gap: 18px;
 }
 
-.cf-tabs span {
+.cf-tabs a {
+  border-bottom: 2px solid transparent;
   color: rgba(234, 242, 255, 0.45);
   font-size: 13px;
   font-weight: 500;
   padding-bottom: 4px;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.cf-tabs a:hover,
+.cf-tabs a:focus-visible {
+  color: rgba(234, 242, 255, 0.82);
+}
+
+.cf-tabs a:focus-visible {
+  outline: 2px solid rgba(47, 224, 210, 0.55);
+  outline-offset: 5px;
 }
 
 .cf-tabs .on {

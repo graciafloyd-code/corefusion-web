@@ -69,11 +69,18 @@ const useCases = [
 ]
 
 const tasks = [
-  ['LLM-Pretrain-32B', '运行中', 'run'],
-  ['AutoDrive-Sim-04', '运行中', 'run'],
-  ['Quant-RiskCalc', '排队', 'queued'],
-  ['CV-Finetune-7B', '运行中', 'run'],
-  ['Genome-Align', '排队', 'queued'],
+  ['LLM-Pretrain-32T', '运行中', 'run'],
+  ['AutoDrive-Sim-04K', '运行中', 'run'],
+  ['Quant-RiskCalc-Mega', '排队', 'queued'],
+  ['CV-Finetune-7T', '运行中', 'run'],
+  ['Genome-Align-Cluster', '排队', 'queued'],
+]
+
+const consoleTabs = [
+  ['总览', '#top'],
+  ['资源池', '#capabilities'],
+  ['任务调度', '#architecture'],
+  ['网络', '#usecases'],
 ]
 
 function asArray<T>(value: unknown): T[] {
@@ -208,9 +215,12 @@ function ConsoleMockup({
     []
   )
   const bars = [42, 58, 51, 73, 66, 80, 70, 88, 76, 64, 71, 60]
+  const nodeTotal = 312000
+  const activeNodes = 56000
+  const throughputGrowth = '18,400%'
 
   return (
-    <div className='cf-console' role='img' aria-label='算力调度控制台示意'>
+    <div className='cf-console' aria-label='算力调度控制台示意'>
       <div className='cf-console-bar'>
         <div className='cf-console-left'>
           <div className='cf-console-title'>
@@ -218,10 +228,11 @@ function ConsoleMockup({
             <span>算力调度控制台</span>
           </div>
           <div className='cf-tabs'>
-            <span className='on'>总览</span>
-            <span>资源池</span>
-            <span>任务调度</span>
-            <span>网络</span>
+            {consoleTabs.map(([label, href], index) => (
+              <a className={index === 0 ? 'on' : ''} href={href} key={href}>
+                {label}
+              </a>
+            ))}
           </div>
         </div>
           <div className='cf-live'>
@@ -243,15 +254,15 @@ function ConsoleMockup({
             <div className='cf-gauge-label'>集群算力利用率</div>
           </div>
           <div className='cf-kv'>
-            <div className='cf-kv-item'><span className='cf-kv-k'>主站 API</span><span className='cf-kv-v'>/v1</span></div>
+            <div className='cf-kv-item'><span className='cf-kv-k'>聚合 API</span><span className='cf-kv-v'>1,000+</span></div>
             <div className='cf-kv-item'><span className='cf-kv-k'>额度比例</span><span className='cf-kv-v c'>{live.quotaPerUnit.toLocaleString()}</span></div>
             <div className='cf-kv-item'><span className='cf-kv-k'>运行时间</span><span className='cf-kv-v b'>{live.uptime}</span></div>
           </div>
         </div>
         <div className='cf-console-col'>
-          <div className='cf-col-head'><span className='t'>资源池 · 节点负载</span><span className='m'>56 / 312 nodes</span></div>
+          <div className='cf-col-head'><span className='t'>资源池 · 节点负载</span><span className='m'>{activeNodes.toLocaleString()} / {nodeTotal.toLocaleString()} nodes</span></div>
           <div className='cf-nodegrid'>{nodes.map((className, index) => <i key={index} className={className} />)}</div>
-          <div className='cf-col-head' style={{ marginTop: 26 }}><span className='t'>24h 吞吐</span><span className='m' style={{ color: 'var(--cf-cyan-bright)', fontFamily: 'var(--cf-gk)', fontWeight: 700 }}>↑ 18.4%</span></div>
+          <div className='cf-col-head' style={{ marginTop: 26 }}><span className='t'>24h 吞吐</span><span className='m' style={{ color: 'var(--cf-cyan-bright)', fontFamily: 'var(--cf-gk)', fontWeight: 700 }}>↑ {throughputGrowth}</span></div>
           <div className='cf-bars'>{bars.map((height, index) => <i key={index} className={index === 7 ? 'hot' : ''} style={{ height: `${height}%` }} />)}</div>
         </div>
         <div className='cf-console-col queue-col'>
