@@ -15,6 +15,7 @@
   --cf-shadow-panel: 0 30px 70px rgba(0, 0, 0, 0.45);
   --cf-maxw: 1240px;
   --cf-gutter: clamp(20px, 5vw, 64px);
+  --cf-section-gap: clamp(72px, 9vw, 124px);
   min-height: 100vh;
   background: var(--cf-bg);
   color: var(--cf-text);
@@ -79,7 +80,7 @@
 }
 
 .cf-section {
-  padding-block: clamp(64px, 9vw, 120px);
+  padding-block: var(--cf-section-gap);
 }
 
 .cf-eyebrow {
@@ -96,13 +97,14 @@
   font-weight: 800;
   line-height: 1.2;
   margin: 14px 0 0;
+  max-width: 840px;
 }
 
 .cf-lead {
   color: var(--cf-text-2);
   font-size: clamp(15px, 1.5vw, 17px);
   line-height: 1.8;
-  max-width: 620px;
+  max-width: 720px;
 }
 
 .cf-btn {
@@ -172,6 +174,7 @@
 .cf-nav-row {
   align-items: center;
   display: flex;
+  gap: 24px;
   height: 72px;
   justify-content: space-between;
 }
@@ -179,6 +182,7 @@
 .cf-brand {
   align-items: center;
   display: flex;
+  flex: 0 0 auto;
   gap: 11px;
 }
 
@@ -212,7 +216,10 @@
 
 .cf-nav-links {
   display: flex;
-  gap: 34px;
+  flex: 1 1 auto;
+  gap: clamp(16px, 2vw, 28px);
+  justify-content: center;
+  min-width: 0;
 }
 
 .cf-nav-links a,
@@ -231,6 +238,7 @@
 .cf-nav-cta {
   align-items: center;
   display: flex;
+  flex: 0 0 auto;
   gap: 16px;
 }
 
@@ -294,16 +302,18 @@
 }
 
 .cf-hero {
-  padding-top: clamp(48px, 7vw, 84px);
+  padding-bottom: clamp(48px, 7vw, 84px);
+  padding-top: clamp(52px, 7vw, 88px);
   text-align: center;
 }
 
 .cf-hero h1 {
   color: var(--cf-heading);
-  font-size: clamp(38px, 6vw, 62px);
+  font-size: clamp(40px, 6vw, 68px);
   font-weight: 800;
   line-height: 1.14;
-  margin: 20px 0 0;
+  margin: 20px auto 0;
+  max-width: 900px;
 }
 
 .cf-hero h1 span {
@@ -312,6 +322,7 @@
 
 .cf-hero .cf-lead {
   margin: 22px auto 0;
+  max-width: 760px;
 }
 
 .cf-actions {
@@ -328,7 +339,9 @@
   border-radius: var(--cf-r-lg);
   box-shadow: var(--cf-shadow-panel);
   color: rgba(234, 242, 255, 0.92);
+  margin-inline: auto;
   margin-top: clamp(40px, 6vw, 64px);
+  max-width: 1120px;
   overflow: hidden;
   text-align: left;
 }
@@ -342,6 +355,7 @@
   background: rgba(124, 160, 255, 0.04);
   border-bottom: 1px solid rgba(124, 160, 255, 0.14);
   display: flex;
+  gap: 18px;
   justify-content: space-between;
   padding: 14px 22px;
 }
@@ -353,7 +367,9 @@
 }
 
 .cf-console-left {
+  flex-wrap: wrap;
   gap: 22px;
+  min-width: 0;
 }
 
 .cf-console-title {
@@ -373,7 +389,8 @@
 
 .cf-tabs {
   display: flex;
-  gap: 18px;
+  flex-wrap: wrap;
+  gap: 14px 18px;
 }
 
 .cf-tabs a {
@@ -634,9 +651,9 @@
   align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 32px;
   justify-content: space-between;
-  padding-block: 34px;
+  padding-block: 30px;
 }
 
 .cf-chips,
@@ -679,7 +696,7 @@
 }
 
 .cf-stats {
-  gap: 48px;
+  gap: clamp(24px, 4vw, 44px);
 }
 
 .cf-stat-value {
@@ -698,11 +715,11 @@
 .cf-cap-grid,
 .cf-use-grid {
   display: grid;
-  margin-top: clamp(40px, 5vw, 60px);
+  margin-top: clamp(34px, 5vw, 56px);
 }
 
 .cf-cap-grid {
-  gap: 24px;
+  gap: 20px;
   grid-template-columns: repeat(3, 1fr);
 }
 
@@ -716,7 +733,10 @@
 
 .cf-cap {
   border-radius: var(--cf-r-lg);
-  padding: 38px 34px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 34px 30px;
   transition:
     transform 0.18s ease,
     border-color 0.18s ease;
@@ -758,7 +778,8 @@
 }
 
 .cf-cap h3 {
-  font-size: 24px;
+  font-size: 23px;
+  line-height: 1.25;
 }
 
 .cf-cap p,
@@ -775,7 +796,8 @@
 .cf-cap-list {
   display: grid;
   gap: 10px;
-  margin: 22px 0 0;
+  margin: auto 0 0;
+  padding-top: 22px;
 }
 
 .cf-cap-list li {
@@ -799,9 +821,9 @@
 
 .cf-agent-grid {
   display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(4, 1fr);
-  margin-top: clamp(40px, 5vw, 58px);
+  gap: 22px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: clamp(34px, 5vw, 56px);
 }
 
 .cf-agent-card {
@@ -810,7 +832,9 @@
   border-radius: var(--cf-r-lg);
   box-shadow: var(--cf-card-shadow);
   min-width: 0;
-  padding: 28px 24px;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  padding: 30px;
 }
 
 .cf-agent-label {
@@ -823,7 +847,7 @@
 
 .cf-agent-card h3 {
   color: var(--cf-heading);
-  font-size: 21px;
+  font-size: 23px;
   font-weight: 800;
   line-height: 1.25;
   margin: 14px 0 12px;
@@ -839,7 +863,8 @@
 .cf-agent-card ul {
   display: grid;
   gap: 9px;
-  margin: 20px 0 0;
+  margin: 22px 0 0;
+  align-content: end;
 }
 
 .cf-agent-card li {
@@ -866,15 +891,15 @@
   border: 1px solid var(--cf-border);
   border-radius: var(--cf-r-lg);
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  margin-top: 20px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin-top: 22px;
   overflow: hidden;
 }
 
 .cf-agent-step {
   background: var(--cf-surface);
   min-width: 0;
-  padding: 18px 20px;
+  padding: 18px;
 }
 
 .cf-agent-step + .cf-agent-step {
@@ -899,8 +924,8 @@
 .cf-arch {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: clamp(40px, 5vw, 56px);
+  gap: 14px;
+  margin-top: clamp(34px, 5vw, 52px);
 }
 
 .cf-layer {
@@ -908,8 +933,8 @@
   border-left: 4px solid var(--cf-blue);
   border-radius: var(--cf-r-md);
   display: flex;
-  gap: clamp(16px, 3vw, 44px);
-  padding: 30px clamp(22px, 3vw, 44px);
+  gap: clamp(16px, 3vw, 38px);
+  padding: 26px clamp(22px, 3vw, 40px);
 }
 
 .cf-layer.l1 { border-left-color: var(--cf-cyan); }
@@ -931,7 +956,7 @@
   flex: 0 0 auto;
   font-size: clamp(20px, 2.4vw, 28px);
   font-weight: 800;
-  width: clamp(150px, 22vw, 260px);
+  width: clamp(150px, 20vw, 240px);
 }
 
 .cf-layer-desc {
@@ -959,13 +984,16 @@
 }
 
 .cf-use-grid {
-  gap: 22px;
-  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .cf-use-card {
   border-radius: var(--cf-r-lg);
-  padding: 34px 28px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 30px 26px;
 }
 
 .cf-use-tag {
@@ -976,7 +1004,8 @@
 }
 
 .cf-use-card h3 {
-  font-size: 22px;
+  font-size: 21px;
+  line-height: 1.3;
   margin-top: 14px;
 }
 
@@ -990,7 +1019,7 @@
   font-size: 13px;
   font-weight: 700;
   line-height: 1.6;
-  margin-top: 20px;
+  margin-top: auto;
   padding-top: 16px;
 }
 
@@ -998,7 +1027,7 @@
   display: grid;
   gap: 18px;
   grid-template-columns: repeat(4, 1fr);
-  margin-top: clamp(34px, 5vw, 52px);
+  margin-top: clamp(32px, 5vw, 50px);
 }
 
 .cf-live-card {
@@ -1007,7 +1036,7 @@
   border-radius: var(--cf-r-lg);
   box-shadow: var(--cf-card-shadow);
   min-width: 0;
-  padding: 24px;
+  padding: 24px 22px;
 }
 
 .cf-live-label {
@@ -1037,7 +1066,7 @@
 .cf-live-feed {
   border: 1px solid var(--cf-border);
   border-radius: var(--cf-r-lg);
-  margin-top: 18px;
+  margin-top: 20px;
   overflow: hidden;
 }
 
@@ -1076,7 +1105,7 @@
 
 .cf-cmp {
   border-collapse: collapse;
-  margin-top: clamp(40px, 5vw, 56px);
+  margin-top: clamp(34px, 5vw, 52px);
   width: 100%;
 }
 
@@ -1084,7 +1113,7 @@
 .cf-cmp td {
   border-bottom: 1px solid var(--cf-border);
   font-size: 15px;
-  padding: 26px 28px;
+  padding: 24px 26px;
   text-align: left;
   vertical-align: top;
 }
@@ -1128,7 +1157,7 @@
   border: 1px solid rgba(124, 160, 255, 0.2);
   border-radius: var(--cf-r-xl);
   overflow: hidden;
-  padding: clamp(48px, 7vw, 80px) var(--cf-gutter);
+  padding: clamp(52px, 7vw, 82px) var(--cf-gutter);
   position: relative;
   text-align: center;
 }
@@ -1165,7 +1194,7 @@
 
 .cf-footer {
   border-top: 1px solid var(--cf-border);
-  margin-top: clamp(64px, 8vw, 100px);
+  margin-top: clamp(56px, 7vw, 88px);
 }
 
 .cf-footer-top {
@@ -1215,6 +1244,15 @@
 }
 
 @media (max-width: 1024px) {
+  .cf-nav-links {
+    gap: 16px;
+  }
+
+  .cf-nav-links a,
+  .cf-nav-login {
+    font-size: 13.5px;
+  }
+
   .cf-console-body {
     grid-template-columns: 1fr 1fr;
   }
@@ -1229,7 +1267,6 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  .cf-agent-grid,
   .cf-agent-flow {
     grid-template-columns: 1fr 1fr;
   }
@@ -1249,6 +1286,23 @@
 
   .cf-menu-btn {
     display: inline-flex;
+  }
+
+  .cf-section {
+    padding-block: clamp(58px, 11vw, 84px);
+  }
+
+  .cf-hero {
+    padding-top: 44px;
+  }
+
+  .cf-console-bar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cf-live {
+    align-self: flex-start;
   }
 
   .cf-cap-grid,
@@ -1292,7 +1346,10 @@
   }
 
   .cf-stats {
-    gap: 28px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
   }
 
   .cf-cmp thead {
@@ -1321,8 +1378,38 @@
     gap: 24px;
   }
 
+  .cf-chips {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cf-chip {
+    width: 100%;
+  }
+
+  .cf-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cf-stat-value {
+    font-size: 28px;
+  }
+
   .cf-nodegrid {
     grid-template-columns: repeat(10, 1fr);
+  }
+
+  .cf-agent-step + .cf-agent-step {
+    border-left: 0;
+    border-top: 1px solid var(--cf-border);
+  }
+
+  .cf-cmp,
+  .cf-cmp tbody,
+  .cf-cmp tr,
+  .cf-cmp td {
+    display: block;
+    width: 100%;
   }
 }
 
