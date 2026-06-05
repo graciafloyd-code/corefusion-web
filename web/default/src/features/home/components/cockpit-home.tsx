@@ -595,15 +595,6 @@ export function CockpitHome(props: CockpitHomeProps) {
               <p>保留调用记录、消耗数据、异常请求与渠道表现，为运营结算和风险控制提供依据。</p>
             </article>
           </div>
-          <div className='cf-live-feed'>
-            {(live.announcements.length > 0 ? live.announcements : [{ content: '暂无公告', extra: live.systemName }]).map((item, index) => (
-              <div className='cf-feed-item' key={`${item.content}-${index}`}>
-                <span>{item.type || 'status'}</span>
-                <strong>{item.content}</strong>
-                <small>{item.extra || item.publishDate || live.systemName}</small>
-              </div>
-            ))}
-          </div>
         </section>
 
         <section className='cf-section cf-wrap' id='architecture'>
