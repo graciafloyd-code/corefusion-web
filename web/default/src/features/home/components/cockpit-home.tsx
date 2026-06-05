@@ -445,8 +445,8 @@ export function CockpitHome(props: CockpitHomeProps) {
 
         <section className='cf-section cf-wrap' id='products'>
           <p className='cf-eyebrow'>Product Matrix</p>
-          <h2 className='cf-h2'>参照成熟 MaaS 平台的信息架构，重组为四条产品线</h2>
-          <p className='cf-lead' style={{ marginTop: 18 }}>首页不再只讲“算力调度”，而是清晰表达主站可以交付什么：模型 API、服务网关、分销商后台和企业 Agent 能力。</p>
+          <h2 className='cf-h2'>围绕模型服务商业化，构建四条核心产品线</h2>
+          <p className='cf-lead' style={{ marginTop: 18 }}>从模型 API 接入、服务网关治理，到分销商运营后台与企业 Agent 套件，形成可交付、可计量、可持续运营的 AI 服务基础设施。</p>
           <div className='cf-product-grid'>
             {productMatrix.map((item) => (
               <article className='cf-product-card' key={item.title}>
