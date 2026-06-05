@@ -53,17 +53,17 @@ export function Hero(props: HeroProps) {
         <div className='max-w-2xl'>
           <div className='mb-5 inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 text-xs font-medium text-muted-foreground shadow-sm'>
             <span className='flex size-2 rounded-full bg-accent shadow-[0_0_14px_color-mix(in_oklch,var(--accent)_80%,transparent)]' />
-            {t('OpenAI-compatible gateway for token relay operations')}
+            {t('面向分销和团队的 AI Token 中转供货站')}
           </div>
 
           <h1 className='text-4xl font-semibold leading-tight tracking-tight md:text-5xl'>
-            {t('一个 Base URL')}
+            {t('稳定供货 Token')}
             <br />
-            {t('接入所有主流模型')}
+            {t('统一分发主流 AI 模型')}
           </h1>
           <p className='mt-5 max-w-xl text-base leading-7 text-muted-foreground'>
             {t(
-              '中科超创 CoreFusion 面向 API 中转站、分销商和团队应用，提供模型聚合、额度计费、密钥管理、日志追踪与上游路由。'
+              '中科超创 CoreFusion 为开发者、团队和分销商提供 OpenAI 兼容 API 中转服务，支持专属 Token、额度上限、模型权限、批发倍率和用量对账。'
             )}
           </p>
 
@@ -75,7 +75,7 @@ export function Hero(props: HeroProps) {
               </Button>
             ) : (
               <Button className='h-10 rounded-lg px-4' render={<Link to='/sign-up' />}>
-                {t('创建 API Key')}
+                {t('申请中转 Token')}
                 <ArrowRight className='size-4' />
               </Button>
             )}
@@ -84,15 +84,15 @@ export function Hero(props: HeroProps) {
               className='h-10 rounded-lg px-4'
               render={<Link to='/pricing' />}
             >
-              {t('查看模型价格')}
+              {t('查看批发价格')}
             </Button>
           </div>
 
           <div className='mt-8 grid max-w-xl gap-3 sm:grid-cols-3'>
             {[
-              { icon: <Route className='size-4' />, label: t('智能路由'), value: t('按组/渠道') },
-              { icon: <WalletCards className='size-4' />, label: t('额度计费'), value: t('Token 明细') },
-              { icon: <ShieldCheck className='size-4' />, label: t('密钥隔离'), value: t('分销商独立') },
+              { icon: <Route className='size-4' />, label: t('统一中转'), value: t('一个入口供货') },
+              { icon: <WalletCards className='size-4' />, label: t('额度管控'), value: t('余额/限额/倍率') },
+              { icon: <ShieldCheck className='size-4' />, label: t('分销隔离'), value: t('专属 Token') },
             ].map((item) => (
               <div key={item.label} className='rounded-lg border bg-muted/20 p-3'>
                 <div className='mb-2 flex items-center gap-2 text-muted-foreground'>
@@ -108,9 +108,9 @@ export function Hero(props: HeroProps) {
         <div className='rounded-xl border bg-background shadow-sm'>
           <div className='flex items-center justify-between border-b px-4 py-3'>
             <div>
-              <div className='text-sm font-semibold'>{t('Gateway Console')}</div>
+              <div className='text-sm font-semibold'>{t('Token Supply Console')}</div>
               <div className='text-xs text-muted-foreground'>
-                {t('实时路由、余额和模型可用性')}
+                {t('额度、倍率、模型权限和请求日志')}
               </div>
             </div>
             <div className='inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-2.5 py-1 text-xs font-medium text-accent'>
@@ -123,7 +123,7 @@ export function Hero(props: HeroProps) {
             <div className='bg-background p-4'>
               <div className='mb-3 flex items-center justify-between'>
                 <div className='text-xs font-medium uppercase tracking-wide text-muted-foreground'>
-                  {t('Unified endpoint')}
+                  {t('统一中转地址')}
                 </div>
                 <Copy className='size-4 text-muted-foreground' />
               </div>
@@ -136,7 +136,7 @@ export function Hero(props: HeroProps) {
 
               <div className='mt-4 rounded-lg border'>
                 <div className='border-b px-3 py-2 text-xs font-medium text-muted-foreground'>
-                  {t('Request preview')}
+                  {t('分销商调用示例')}
                 </div>
                 <pre className='overflow-x-auto p-3 text-xs leading-6'>
 {`curl /chat/completions \\
@@ -154,19 +154,19 @@ export function Hero(props: HeroProps) {
                 <div className='rounded-lg border p-3'>
                   <KeyRound className='mb-2 size-4 text-primary' />
                   <div className='text-xl font-semibold'>3</div>
-                  <div className='text-xs text-muted-foreground'>{t('分销商 Key')}</div>
+                  <div className='text-xs text-muted-foreground'>{t('合作分销商')}</div>
                 </div>
                 <div className='rounded-lg border p-3'>
                   <LineChart className='mb-2 size-4 text-accent' />
                   <div className='text-xl font-semibold'>13ms</div>
-                  <div className='text-xs text-muted-foreground'>{t('路由耗时')}</div>
+                  <div className='text-xs text-muted-foreground'>{t('平均中转耗时')}</div>
                 </div>
               </div>
 
               <div className='rounded-lg border'>
                 <div className='flex items-center gap-2 border-b px-3 py-2'>
                   <Layers3 className='size-4 text-muted-foreground' />
-                  <span className='text-xs font-medium'>{t('Model routing')}</span>
+                  <span className='text-xs font-medium'>{t('模型供货分组')}</span>
                 </div>
                 <div className='divide-y'>
                   {modelRows.map((row) => (

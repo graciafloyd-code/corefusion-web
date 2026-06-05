@@ -26,25 +26,25 @@ export function HowItWorks() {
   const steps = [
     {
       num: '01',
-      title: t('开通额度'),
-      desc: t('为账号或分销商令牌分配额度，按分组设置倍率和可用模型。'),
+      title: t('开通批发额度'),
+      desc: t('为客户或分销商分配余额，按合作等级设置倍率和可用模型。'),
       icon: <CreditCard className='size-5' />,
     },
     {
       num: '02',
-      title: t('创建 API Key'),
-      desc: t('在令牌管理中创建独立密钥，可随时禁用、重置或追加额度。'),
+      title: t('发放专属 Token'),
+      desc: t('为每个客户创建独立 Token，可随时禁用、重置或追加额度。'),
       icon: <KeyRound className='size-5' />,
     },
     {
       num: '03',
-      title: t('替换 Base URL'),
-      desc: t('现有 OpenAI SDK 不改业务代码，只替换 base_url 和 key。'),
+      title: t('下游接入主站'),
+      desc: t('下游保持 OpenAI 兼容调用，只替换 base_url 和专属 Token。'),
       icon: <Code2 className='size-5' />,
     },
     {
       num: '04',
-      title: t('看日志对账'),
+      title: t('按消耗结算'),
       desc: t('在使用日志中核对模型、Token、费用、渠道和错误原因。'),
       icon: <BarChart3 className='size-5' />,
     },
@@ -56,15 +56,15 @@ export function HowItWorks() {
         <AnimateInView className='mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end'>
           <div>
             <p className='mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground'>
-              {t('Integration flow')}
+              {t('Wholesale flow')}
             </p>
             <h2 className='text-2xl font-semibold tracking-tight md:text-3xl'>
-              {t('四步完成 API 中转接入')}
+              {t('四步完成 Token 批发供货')}
             </h2>
           </div>
           <p className='max-w-xl text-sm leading-6 text-muted-foreground'>
             {t(
-              '适合个人开发者、团队应用和分销商：先开额度，再发 Key，最后用日志完成成本和质量闭环。'
+              '适合个人开发者、团队客户和分销商：先开额度，再发 Token，最后按用量日志完成成本、售后和结算闭环。'
             )}
           </p>
         </AnimateInView>

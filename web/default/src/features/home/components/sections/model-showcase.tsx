@@ -29,7 +29,7 @@ const models = [
     in: 'Text',
     out: 'Text',
     context: '128K',
-    price: '高性价比',
+    price: '主推供货',
   },
   {
     name: 'gpt-4o-mini',
@@ -37,7 +37,7 @@ const models = [
     in: 'Text / Vision',
     out: 'Text',
     context: '128K',
-    price: '轻量任务',
+    price: '低成本转售',
   },
   {
     name: 'claude-sonnet-4',
@@ -45,7 +45,7 @@ const models = [
     in: 'Text / Vision',
     out: 'Text',
     context: '200K',
-    price: '长文本',
+    price: '高端套餐',
   },
   {
     name: 'qwen-plus',
@@ -53,7 +53,7 @@ const models = [
     in: 'Text',
     out: 'Text',
     context: '128K',
-    price: '中文优化',
+    price: '中文场景',
   },
 ]
 
@@ -66,19 +66,19 @@ export function ModelShowcase() {
         <AnimateInView className='mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end'>
           <div>
             <p className='mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground'>
-              {t('Model catalog')}
+              {t('Model supply')}
             </p>
             <h2 className='text-2xl font-semibold tracking-tight md:text-3xl'>
-              {t('公开展示模型、能力和价格入口')}
+              {t('把可售模型、权限和价格透明展示给客户')}
             </h2>
           </div>
           <div className='flex gap-2'>
             <Button variant='outline' className='h-9 rounded-lg' render={<Link to='/pricing' />}>
               <Search className='size-4' />
-              {t('浏览模型')}
+              {t('查看可售模型')}
             </Button>
             <Button className='h-9 rounded-lg' render={<Link to='/pricing' />}>
-              {t('查看价格')}
+              {t('查看计费')}
               <ArrowRight className='size-4' />
             </Button>
           </div>

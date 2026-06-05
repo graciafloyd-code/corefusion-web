@@ -39,50 +39,50 @@ export function Features(_props: FeaturesProps) {
   const features = [
     {
       icon: <Braces className='size-5' />,
-      title: t('OpenAI 兼容接口'),
-      desc: t('保留原 SDK 调用方式，只替换 Base URL 和 API Key 即可迁移。'),
+      title: t('OpenAI 兼容中转'),
+      desc: t('客户和分销商保持原 SDK 调用方式，只替换 Base URL 和 Token。'),
       meta: 'POST /v1/chat/completions',
     },
     {
       icon: <Network className='size-5' />,
-      title: t('多模型聚合'),
-      desc: t('DeepSeek、OpenAI、Claude、Gemini、Qwen 等模型统一管理。'),
+      title: t('多模型供货池'),
+      desc: t('统一管理 DeepSeek、OpenAI、Claude、Gemini、Qwen 等可售模型。'),
       meta: '40+ models',
     },
     {
       icon: <Split className='size-5' />,
-      title: t('渠道路由与故障切换'),
-      desc: t('按分组、倍率、优先级和健康状态选择可用上游。'),
+      title: t('上游路由与故障切换'),
+      desc: t('按分组、优先级、健康状态和可用余额选择稳定上游。'),
       meta: 'priority / weight',
     },
     {
       icon: <CircleDollarSign className='size-5' />,
-      title: t('Token 余额与倍率计费'),
-      desc: t('按模型、用户、分组和分销商分别统计消耗与剩余额度。'),
+      title: t('额度与批发倍率'),
+      desc: t('按客户、分销商、模型和分组分别统计消耗与剩余额度。'),
       meta: 'quota ledger',
     },
     {
       icon: <KeyRound className='size-5' />,
-      title: t('API Key 生命周期'),
-      desc: t('支持独立令牌、限额、禁用、重置和使用日志追踪。'),
+      title: t('专属 Token 管理'),
+      desc: t('支持独立 Token、限额、禁用、重置和调用日志追踪。'),
       meta: 'key isolation',
     },
     {
       icon: <UsersRound className='size-5' />,
-      title: t('分销商 OEM'),
-      desc: t('每个分销商独立入口、独立倍率、独立额度池，统一回源主实例。'),
+      title: t('分销商 OEM 接入'),
+      desc: t('分销商可使用独立后台和域名，统一回源你的主站 Token。'),
       meta: 'dealer ready',
     },
     {
       icon: <BarChart3 className='size-5' />,
-      title: t('用量日志与对账'),
-      desc: t('每次请求记录模型、Token、费用、渠道与响应状态。'),
+      title: t('用量日志与结算'),
+      desc: t('每次请求记录模型、Token、费用、渠道和响应状态，便于结算。'),
       meta: 'request trace',
     },
     {
       icon: <ShieldCheck className='size-5' />,
-      title: t('运营级安全控制'),
-      desc: t('支持登录、角色、额度阈值、渠道禁用和敏感配置隐藏。'),
+      title: t('运营级风控'),
+      desc: t('支持角色、额度阈值、异常停用、渠道禁用和敏感配置隐藏。'),
       meta: 'admin guard',
     },
   ]
@@ -92,10 +92,10 @@ export function Features(_props: FeaturesProps) {
       <div className='mx-auto max-w-7xl'>
         <AnimateInView className='mb-8 max-w-2xl'>
           <p className='mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground'>
-            {t('Relay station essentials')}
+            {t('Token relay essentials')}
           </p>
           <h2 className='text-2xl font-semibold tracking-tight md:text-3xl'>
-            {t('从接入、分发到对账，都在一个后台里完成')}
+            {t('从 Token 发放、模型分销到消耗结算，都在一个后台里完成')}
           </h2>
         </AnimateInView>
 

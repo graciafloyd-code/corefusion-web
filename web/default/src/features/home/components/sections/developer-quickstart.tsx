@@ -38,9 +38,9 @@ export function DeveloperQuickstart() {
   const { t } = useTranslation()
 
   const checks = [
-    t('兼容 OpenAI SDK 和 REST API'),
-    t('一个 Key 可按权限访问多个模型'),
-    t('按 Token、模型、渠道记录成本'),
+    t('分销商只需要替换 Base URL 和专属 Token'),
+    t('按合作等级控制模型范围和批发倍率'),
+    t('每次调用都能按 Token、模型和费用追踪'),
   ]
 
   return (
@@ -48,14 +48,14 @@ export function DeveloperQuickstart() {
       <div className='mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center'>
         <AnimateInView>
           <p className='mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground'>
-            {t('Quick start')}
+            {t('Distributor quick start')}
           </p>
           <h2 className='text-2xl font-semibold tracking-tight md:text-3xl'>
-            {t('5 分钟完成迁移，只换地址和密钥')}
+            {t('5 分钟把下游请求接入你的主站')}
           </h2>
           <p className='mt-4 max-w-xl text-sm leading-6 text-muted-foreground'>
             {t(
-              '面向开发者、团队应用和分销商后台，保持 OpenAI 调用方式不变，通过 CoreFusion 统一完成模型路由、额度扣费和日志审计。'
+              '给每个客户或分销商发放独立 Token，他们按 OpenAI 兼容方式调用；主站统一扣额度、控模型、算倍率并保留日志。'
             )}
           </p>
 
@@ -70,9 +70,9 @@ export function DeveloperQuickstart() {
 
           <div className='mt-6 grid gap-3 sm:grid-cols-3'>
             {[
-              { icon: <KeyRound className='size-4' />, label: t('创建 Key') },
-              { icon: <Code2 className='size-4' />, label: t('替换 Base URL') },
-              { icon: <TerminalSquare className='size-4' />, label: t('查看日志') },
+              { icon: <KeyRound className='size-4' />, label: t('分配 Token') },
+              { icon: <Code2 className='size-4' />, label: t('填写上游地址') },
+              { icon: <TerminalSquare className='size-4' />, label: t('按单对账') },
             ].map((item) => (
               <div key={item.label} className='rounded-lg border bg-background p-3 text-sm'>
                 <div className='mb-2 text-muted-foreground'>{item.icon}</div>

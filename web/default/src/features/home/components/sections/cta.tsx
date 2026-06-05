@@ -43,21 +43,21 @@ export function CTA(props: CTAProps) {
         <div className='max-w-2xl'>
           <div className='mb-3 flex items-center gap-2 text-sm font-medium text-muted-foreground'>
             <Gauge className='size-4' />
-            {t('Ready for production relay')}
+            {t('Ready for token wholesale')}
           </div>
           <h2 className='text-2xl font-semibold tracking-tight md:text-3xl'>
-            {t('现在开始创建你的第一个中转 Key')}
+            {t('现在开始发放你的第一个中转 Token')}
           </h2>
           <p className='mt-3 text-sm leading-6 text-muted-foreground'>
             {t(
-              '接入后即可查看余额、模型价格、请求日志和渠道状态，把模型成本控制在同一个后台里。'
+              '接入后即可配置客户额度、可用模型、批发倍率和请求日志，把 Token 销售与结算放在同一个后台里。'
             )}
           </p>
         </div>
         <div className='flex shrink-0 flex-wrap gap-3'>
           <Button className='h-10 rounded-lg px-4' render={<Link to='/sign-up' />}>
             <KeyRound className='size-4' />
-            {t('创建 Key')}
+            {t('创建 Token')}
             <ArrowRight className='size-4' />
           </Button>
           <Button
@@ -65,7 +65,7 @@ export function CTA(props: CTAProps) {
             className='h-10 rounded-lg px-4'
             render={<Link to='/pricing' />}
           >
-            {t('模型价格')}
+            {t('批发价格')}
           </Button>
         </div>
       </AnimateInView>

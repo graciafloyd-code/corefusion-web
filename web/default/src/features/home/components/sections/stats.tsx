@@ -26,10 +26,10 @@ export function Stats(_props: StatsProps) {
   const { t } = useTranslation()
 
   const stats = [
-    { value: '1', label: t('统一 Base URL'), detail: 'OpenAI SDK compatible' },
-    { value: '40+', label: t('可路由模型'), detail: 'DeepSeek / OpenAI / Claude' },
-    { value: '3', label: t('分销商额度组'), detail: 'default / vip / svip' },
-    { value: '100%', label: t('请求日志留痕'), detail: 'tokens / cost / channel' },
+    { value: '1', label: t('统一 API 入口'), detail: 'https://supchuang.com/v1' },
+    { value: '40+', label: t('可售模型资源'), detail: 'DeepSeek / OpenAI / Claude' },
+    { value: '3', label: t('批发价分组'), detail: 'standard / pro / strategic' },
+    { value: '100%', label: t('消耗可对账'), detail: 'token / model / cost' },
   ]
 
   return (
