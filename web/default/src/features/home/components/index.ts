@@ -17,6 +17,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 export { CTA } from './sections/cta'
+export { CockpitHome } from './cockpit-home'
 export { DeveloperQuickstart } from './sections/developer-quickstart'
 export { Enterprise } from './sections/enterprise'
 export { Features } from './sections/features'

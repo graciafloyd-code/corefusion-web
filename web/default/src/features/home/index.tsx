@@ -20,17 +20,7 @@ import { useTranslation } from 'react-i18next'
 import { useAuthStore } from '@/stores/auth-store'
 import { Markdown } from '@/components/ui/markdown'
 import { PublicLayout } from '@/components/layout'
-import { Footer } from '@/components/layout/components/footer'
-import {
-  CTA,
-  DeveloperQuickstart,
-  Enterprise,
-  Features,
-  Hero,
-  HowItWorks,
-  ModelShowcase,
-  Stats,
-} from './components'
+import { CockpitHome } from './components'
 import { useHomePageContent } from './hooks'
 
 export function Home() {
@@ -71,15 +61,7 @@ export function Home() {
 
   return (
     <PublicLayout showHeader={false} showMainContainer={false}>
-      <Hero isAuthenticated={isAuthenticated} />
-      <Stats />
-      <ModelShowcase />
-      <DeveloperQuickstart />
-      <Features />
-      <Enterprise />
-      <HowItWorks />
-      <CTA isAuthenticated={isAuthenticated} />
-      <Footer />
+      <CockpitHome isAuthenticated={isAuthenticated} />
     </PublicLayout>
   )
 }
