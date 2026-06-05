@@ -29,6 +29,7 @@ import {
   PricingToolbar,
   ModelCardGrid,
   ModelDetailsDrawer,
+  WholesaleProfitTable,
 } from './components'
 import { EXCLUDED_GROUPS, VIEW_MODES } from './constants'
 import { useFilters } from './hooks/use-filters'
@@ -175,19 +176,19 @@ export function Pricing() {
         <PageTransition className='relative mx-auto w-full max-w-[1800px] px-3 pt-16 pb-8 sm:px-6 sm:pt-20 sm:pb-10 xl:px-8'>
           <header className='mx-auto mb-5 max-w-3xl pt-5 text-center sm:mb-10 sm:pt-10'>
             <p className='text-muted-foreground mb-3 text-xs font-medium tracking-widest uppercase'>
-              {t('Models Directory')}
+              {t('Model pricing')}
             </p>
             <h1 className='text-[clamp(2rem,5.5vw,3.5rem)] leading-[1.15] font-bold tracking-tight'>
-              {t('Model Square')}
+              {t('模型价格与分销利润')}
             </h1>
             <p className='text-muted-foreground/80 mt-3 text-sm sm:mt-4 sm:text-base'>
-              {t('This site currently has {{count}} models enabled', {
+              {t('当前主站已开放 {{count}} 个可售模型', {
                 count: models?.length || 0,
               })}
             </p>
             <p className='text-muted-foreground/60 mx-auto mt-2 max-w-2xl text-xs leading-relaxed sm:text-sm'>
               {t(
-                'Discover curated AI models, compare pricing and capabilities, and choose the right model for every scenario.'
+                '查看每个模型的建议售价、分销拿货倍率和利润空间，用于客户报价、分销合作和成本核算。'
               )}
             </p>
             <SearchBar
@@ -224,6 +225,11 @@ export function Pricing() {
             />
 
             <main className='min-w-0 space-y-4'>
+              <WholesaleProfitTable
+                models={models || []}
+                groupRatio={groupRatio || {}}
+              />
+
               <PricingToolbar
                 filteredCount={filteredModels.length}
                 totalCount={models?.length}
