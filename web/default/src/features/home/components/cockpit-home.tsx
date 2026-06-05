@@ -49,23 +49,82 @@ type AnnouncementItem = {
 }
 
 const capabilities = [
-  ['CAPABILITY 01', '异构算力纳管', '将不同地域、架构、厂商的 GPU/CPU 抽象为统一资源池，硬件亲和性感知实现最优匹配部署。'],
-  ['CAPABILITY 02', '智能调度编排', '多维强化学习决策模型，结合历史数据预测任务需求，提前完成资源预热与毫秒级分配。'],
-  ['CAPABILITY 03', '算网融合加速', '将实时网络状态纳入调度核心决策；算力网络切片为关键业务预留专用低延迟通道。'],
+  {
+    num: 'CAPABILITY 01',
+    title: '异构算力纳管',
+    desc: '统一接入公有云、私有云、IDC、边缘节点与独立 GPU 资源，将 NVIDIA、昇腾、寒武纪等不同硬件抽象为可调度资源池。',
+    points: ['多云与本地集群统一视图', 'GPU / NPU / CPU 资源画像', '镜像、环境、权限与账单联动'],
+  },
+  {
+    num: 'CAPABILITY 02',
+    title: '智能调度编排',
+    desc: '围绕训练、推理、批处理和在线服务建立作业队列，根据成本、显存、拓扑、优先级与 SLA 自动选择最合适的算力位置。',
+    points: ['队列优先级与配额控制', '成本感知与闲置资源复用', '故障迁移、重试与自愈'],
+  },
+  {
+    num: 'CAPABILITY 03',
+    title: '算网融合加速',
+    desc: '把网络延迟、带宽、地域、链路质量纳入调度判断，适合跨地域推理、分布式训练、边云协同和高并发 API 服务。',
+    points: ['网络拓扑感知调度', '就近接入与链路优选', '吞吐、延迟、错误率持续观测'],
+  },
 ]
 
 const layers = [
-  ['Layer 04', '应用场景层', '大模型预训练 · 高并发科学计算 · L4 自动驾驶仿真 · 毫秒级金融风控', ''],
-  ['Layer 03', '服务使能层', '统一算力抽象 API · 模块化 AI 开发套件 · 全链路可视化控制台', 'l3'],
-  ['Layer 02', '平台核心层', '自适应资源管理 · 分布式智能调度引擎 · 动态网络优化 · 企业级安全管控', 'l2'],
-  ['Layer 01', '资源接入层', '异构硬件驱动 · 多云资源连接器 · 智算中心适配器，融合 GPU 集群与边缘节点', 'l1'],
+  {
+    layer: 'Layer 04',
+    title: '应用场景层',
+    desc: '面向模型训练、在线推理、科学计算、自动驾驶仿真、金融风控等业务提供统一入口。',
+    tone: '',
+    details: ['API 服务', 'Notebook / Workbench', '批量作业', '行业模板'],
+  },
+  {
+    layer: 'Layer 03',
+    title: '服务使能层',
+    desc: '提供模型服务、任务编排、用户与租户管理、用量计费、运营报表和开发者接入能力。',
+    tone: 'l3',
+    details: ['OpenAI 兼容网关', '多租户权限', '计费倍率', '运营看板'],
+  },
+  {
+    layer: 'Layer 02',
+    title: '平台核心层',
+    desc: '调度引擎基于资源画像、队列策略、网络状态、成本约束和服务优先级完成自动编排。',
+    tone: 'l2',
+    details: ['资源画像', '队列调度', '故障自愈', '成本优化'],
+  },
+  {
+    layer: 'Layer 01',
+    title: '资源接入层',
+    desc: '向下连接 Kubernetes、裸金属、云厂商、智算中心与边缘节点，形成可运营的统一资源底座。',
+    tone: 'l1',
+    details: ['K8s / IDC', 'GPU / NPU', '镜像仓库', '网络探针'],
+  },
 ]
 
 const useCases = [
-  ['AI / LLM', 'AI 模型研发', '大规模、低成本、高弹性训练集群，支持百亿级参数模型高效迭代。'],
-  ['FINANCE', '金融量化分析', '毫秒级响应的高频交易算力，让复杂量化策略在瞬息市场中精准执行。'],
-  ['AUTONOMY', '自动驾驶仿真', '按需付费弹性算力，支持海量 Corner Case 全天候并行仿真。'],
-  ['SMART CITY', '智慧城市', '统一纳管边缘与云端异构算力，从智慧交通到安防分析提供敏捷底座。'],
+  {
+    tag: 'AI / LLM',
+    title: 'AI 模型研发与推理服务',
+    desc: '研发团队可按项目申请 GPU 配额，训练任务走队列调度，推理服务走低延迟网关，统一查看成本、吞吐和错误率。',
+    outcome: '适合模型训练、微调、批量推理和 API 商业化。',
+  },
+  {
+    tag: 'GPUAAS',
+    title: 'GPU 云与分销运营',
+    desc: '将分散 GPU 资源包装成可售卖套餐，支持租户隔离、额度上限、模型范围、批发倍率和分销商 Token 交付。',
+    outcome: '适合智算中心、IDC、云服务商做 GPUaaS / APIaaS。',
+  },
+  {
+    tag: 'HPC / RESEARCH',
+    title: '科研仿真与高性能计算',
+    desc: '面向高校、实验室、药物发现、基因分析和工程仿真，支持批处理队列、环境复现、任务追踪和资源审计。',
+    outcome: '适合长周期批量作业与多团队共享集群。',
+  },
+  {
+    tag: 'EDGE AI',
+    title: '边云协同与行业智能',
+    desc: '在边缘节点处理低延迟任务，在中心云完成模型更新和大规模计算，按网络状态自动选择最优执行位置。',
+    outcome: '适合智慧城市、工业视觉、车路协同和安防分析。',
+  },
 ]
 
 const tasks = [
@@ -237,7 +296,7 @@ function ConsoleMockup({
         </div>
           <div className='cf-live'>
             <span className='cf-live-dot' />
-          /api/status 实时
+          运营状态同步
         </div>
       </div>
       <div className='cf-console-body'>
@@ -255,7 +314,7 @@ function ConsoleMockup({
           </div>
           <div className='cf-kv'>
             <div className='cf-kv-item'><span className='cf-kv-k'>聚合 API</span><span className='cf-kv-v'>1,000+</span></div>
-            <div className='cf-kv-item'><span className='cf-kv-k'>额度比例</span><span className='cf-kv-v c'>{live.quotaPerUnit.toLocaleString()}</span></div>
+            <div className='cf-kv-item'><span className='cf-kv-k'>计费策略</span><span className='cf-kv-v c'>已配置</span></div>
             <div className='cf-kv-item'><span className='cf-kv-k'>运行时间</span><span className='cf-kv-v b'>{live.uptime}</span></div>
           </div>
         </div>
@@ -268,14 +327,7 @@ function ConsoleMockup({
         <div className='cf-console-col queue-col'>
           <div className='cf-col-head'><span className='t'>调度队列</span></div>
           <div className='cf-queue'>
-            {(live.apiInfo.length > 0
-              ? live.apiInfo.map((item, index) => [
-                  item.route || `API-${index + 1}`,
-                  item.url || live.baseUrl,
-                  'run',
-                ])
-              : tasks
-            ).map(([name, status, state]) => (
+            {tasks.map(([name, status, state]) => (
               <div className='cf-task' key={name}>
                 <div className='cf-task-info'><span className={`cf-status-dot cf-${state}`} /><span className='cf-task-name'>{name}</span></div>
                 <span className={`cf-task-state cf-${state}-t`}>{status}</span>
@@ -294,9 +346,9 @@ export function CockpitHome(props: CockpitHomeProps) {
   const live = useMemo(() => buildLiveData(status), [status])
   const consoleHref = props.isAuthenticated ? '/dashboard' : '/sign-in'
   const stats = [
-    [`${live.quotaPerUnit.toLocaleString()}`, `1 ${live.currency} 对应额度`],
-    [`${live.apiInfo.length}`, '公开 API 信息'],
-    [`${live.announcements.length}`, '运营公告'],
+    ['312,000+', '可纳管异构节点'],
+    ['1,000+', '模型与接口能力'],
+    ['99.9%', '平台服务可用性'],
     [live.uptime, '系统运行时间'],
   ]
 
@@ -342,7 +394,7 @@ export function CockpitHome(props: CockpitHomeProps) {
         <section className='cf-section cf-hero cf-wrap'>
           <p className='cf-eyebrow'>CoreFusion™ 智能算力中枢</p>
           <h1>算力调度，<span>尽在掌握</span></h1>
-          <p className='cf-lead'>一张控制台，统一纳管跨云、跨架构的异构算力。当前主站已接入真实公开配置：{live.baseUrl}，额度比例为 1 {live.currency} = {live.quotaPerUnit.toLocaleString()} quota。</p>
+          <p className='cf-lead'>面向企业级 AI 与高性能计算场景，统一纳管跨云、跨架构的异构算力资源，构建可调度、可计量、可运营的智能算力中枢。</p>
           <div className='cf-actions'>
             <ButtonLink href='#cta' primary>预约演示</ButtonLink>
             <ButtonLink href='#capabilities'>查看产品 ↗</ButtonLink>
@@ -365,41 +417,44 @@ export function CockpitHome(props: CockpitHomeProps) {
           <h2 className='cf-h2'>三大核心能力，破解算力孤岛</h2>
           <p className='cf-lead' style={{ marginTop: 18 }}>定位为「算力电网」而非「算力房东」——中立、可调度、跨架构，让分散算力汇成统一资源池。</p>
           <div className='cf-cap-grid'>
-            {capabilities.map(([num, title, desc]) => (
-              <article className='cf-cap' key={num}>
+            {capabilities.map((item) => (
+              <article className='cf-cap' key={item.num}>
                 <div className='cf-cap-icon'><Mark role='icon' /></div>
-                <div className='cf-num'>{num}</div>
-                <h3>{title}</h3>
-                <p>{desc}</p>
+                <div className='cf-num'>{item.num}</div>
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+                <ul className='cf-cap-list'>
+                  {item.points.map((point) => <li key={point}>{point}</li>)}
+                </ul>
               </article>
             ))}
           </div>
         </section>
 
         <section className='cf-section cf-wrap' id='live-config'>
-          <p className='cf-eyebrow'>Live Site Data</p>
-          <h2 className='cf-h2'>主站公开配置，直接进入首页</h2>
-          <p className='cf-lead' style={{ marginTop: 18 }}>以下数据来自线上 `/api/status`，用于让官网不只是静态宣发页，而是能展示当前主站配置与运营状态。</p>
+          <p className='cf-eyebrow'>Operations Console</p>
+          <h2 className='cf-h2'>从资源接入到商业化运营，形成闭环控制面</h2>
+          <p className='cf-lead' style={{ marginTop: 18 }}>平台围绕资源、模型、租户与计费构建统一运营体系，帮助算力供应方把底层资源转化为稳定、可审计、可交付的服务能力。</p>
           <div className='cf-live-grid'>
             <article className='cf-live-card'>
-              <div className='cf-live-label'>API Base URL</div>
-              <div className='cf-live-value'>{live.baseUrl}</div>
-              <p>{live.apiInfo[0]?.description || 'OpenAI 兼容调用入口，供客户和分销商接入。'}</p>
+              <div className='cf-live-label'>Gateway</div>
+              <div className='cf-live-value'>统一 API 网关</div>
+              <p>兼容主流模型调用协议，统一承接企业客户、开发者与分销商的接入请求。</p>
             </article>
             <article className='cf-live-card'>
-              <div className='cf-live-label'>Quota</div>
-              <div className='cf-live-value'>1 {live.currency} = {live.quotaPerUnit.toLocaleString()} quota</div>
-              <p>跟随后台运营设置实时展示，便于客户理解充值与消耗换算。</p>
+              <div className='cf-live-label'>Billing</div>
+              <div className='cf-live-value'>额度与倍率管理</div>
+              <p>支持租户额度、模型范围、计费倍率、批发价与分销策略的精细化配置。</p>
             </article>
             <article className='cf-live-card'>
               <div className='cf-live-label'>Access</div>
-              <div className='cf-live-value'>{live.passwordLoginEnabled ? '密码登录开启' : '密码登录关闭'}</div>
-              <p>{live.registerEnabled ? '公开注册已开启。' : '公开注册未开启，适合人工审核客户和分销商。'}</p>
+              <div className='cf-live-value'>多租户访问控制</div>
+              <p>以用户、分组、Token 和策略为基础，隔离不同客户、团队与渠道的访问边界。</p>
             </article>
             <article className='cf-live-card'>
               <div className='cf-live-label'>Compliance</div>
-              <div className='cf-live-value'>{live.legalEnabled ? '协议与隐私已开启' : '待完善'}</div>
-              <p>首页同步展示主站合规配置状态，减少上线前人工核对。</p>
+              <div className='cf-live-value'>审计与风控</div>
+              <p>保留调用记录、消耗数据、异常请求与渠道表现，为运营结算和风险控制提供依据。</p>
             </article>
           </div>
           <div className='cf-live-feed'>
@@ -417,11 +472,16 @@ export function CockpitHome(props: CockpitHomeProps) {
           <p className='cf-eyebrow'>CoreFusion™ Architecture</p>
           <h2 className='cf-h2'>四层全栈融合架构</h2>
           <div className='cf-arch'>
-            {layers.map(([layer, title, desc, tone]) => (
-              <div className={`cf-layer ${tone}`} key={layer}>
-                <span className='cf-layer-x'>{layer}</span>
-                <span className='cf-layer-title'>{title}</span>
-                <span className='cf-layer-desc'>{desc}</span>
+            {layers.map((item) => (
+              <div className={`cf-layer ${item.tone}`} key={item.layer}>
+                <span className='cf-layer-x'>{item.layer}</span>
+                <span className='cf-layer-title'>{item.title}</span>
+                <span className='cf-layer-desc'>
+                  {item.desc}
+                  <span className='cf-layer-tags'>
+                    {item.details.map((detail) => <em key={detail}>{detail}</em>)}
+                  </span>
+                </span>
               </div>
             ))}
           </div>
@@ -431,11 +491,12 @@ export function CockpitHome(props: CockpitHomeProps) {
           <p className='cf-eyebrow'>Use Cases</p>
           <h2 className='cf-h2'>四大高价值场景</h2>
           <div className='cf-use-grid'>
-            {useCases.map(([tag, title, desc]) => (
-              <article className='cf-use-card' key={tag}>
-                <div className='cf-use-tag'>{tag}</div>
-                <h3>{title}</h3>
-                <p>{desc}</p>
+            {useCases.map((item) => (
+              <article className='cf-use-card' key={item.tag}>
+                <div className='cf-use-tag'>{item.tag}</div>
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+                <div className='cf-use-outcome'>{item.outcome}</div>
               </article>
             ))}
           </div>

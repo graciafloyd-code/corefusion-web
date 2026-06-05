@@ -772,6 +772,31 @@
   font-size: 14.5px;
 }
 
+.cf-cap-list {
+  display: grid;
+  gap: 10px;
+  margin: 22px 0 0;
+}
+
+.cf-cap-list li {
+  align-items: center;
+  color: var(--cf-text);
+  display: flex;
+  font-size: 13.5px;
+  gap: 10px;
+  line-height: 1.5;
+}
+
+.cf-cap-list li::before {
+  background: var(--cf-cyan-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(47, 224, 210, 0.5);
+  content: '';
+  flex: 0 0 auto;
+  height: 6px;
+  width: 6px;
+}
+
 .cf-arch {
   display: flex;
   flex-direction: column;
@@ -816,6 +841,24 @@
   line-height: 1.65;
 }
 
+.cf-layer-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.cf-layer-tags em {
+  background: var(--cf-surface-2);
+  border: 1px solid var(--cf-border);
+  border-radius: 999px;
+  color: var(--cf-text);
+  font-style: normal;
+  font-size: 12px;
+  line-height: 1;
+  padding: 8px 10px;
+}
+
 .cf-use-grid {
   gap: 22px;
   grid-template-columns: repeat(4, 1fr);
@@ -840,6 +883,16 @@
 
 .cf-use-card p {
   font-size: 13.5px;
+}
+
+.cf-use-outcome {
+  border-top: 1px solid var(--cf-border);
+  color: var(--cf-heading);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.6;
+  margin-top: 20px;
+  padding-top: 16px;
 }
 
 .cf-live-grid {
