@@ -19,6 +19,7 @@ For commercial licensing, please contact support@quantumnous.com
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { X } from 'lucide-react'
+import { useStatus } from '@/hooks/use-status'
 import { ThemeSwitch } from '@/components/theme-switch'
 import './cockpit-home.css'
 
@@ -33,12 +34,19 @@ const navItems = [
   { label: '为什么选择', href: '#why' },
 ]
 
-const stats = [
-  ['70%+', '算力利用率'],
-  ['32', '接入数据中心'],
-  ['<5ms', '调度延迟'],
-  ['99.9%', '平台可用性'],
-]
+type ApiInfoItem = {
+  route?: string
+  url?: string
+  description?: string
+  color?: string
+}
+
+type AnnouncementItem = {
+  content?: string
+  extra?: string
+  type?: string
+  publishDate?: string
+}
 
 const capabilities = [
   ['CAPABILITY 01', '异构算力纳管', '将不同地域、架构、厂商的 GPU/CPU 抽象为统一资源池，硬件亲和性感知实现最优匹配部署。'],
@@ -67,6 +75,53 @@ const tasks = [
   ['CV-Finetune-7B', '运行中', 'run'],
   ['Genome-Align', '排队', 'queued'],
 ]
+
+function asArray<T>(value: unknown): T[] {
+  return Array.isArray(value) ? (value as T[]) : []
+}
+
+function getUptimeDays(startTime: unknown) {
+  if (typeof startTime !== 'number' || startTime <= 0) return '在线'
+  const diff = Date.now() / 1000 - startTime
+  if (diff < 86400) return '<1天'
+  return `${Math.floor(diff / 86400)}天`
+}
+
+function buildLiveData(status: Record<string, unknown> | null) {
+  const quotaPerUnit =
+    typeof status?.quota_per_unit === 'number' ? status.quota_per_unit : 10000
+  const currency =
+    typeof status?.quota_display_type === 'string'
+      ? status.quota_display_type
+      : 'CNY'
+  const apiInfo = asArray<ApiInfoItem>(status?.api_info)
+  const announcements = asArray<AnnouncementItem>(status?.announcements)
+  const faq = asArray<{ question?: string; answer?: string }>(status?.faq)
+  const serverAddress =
+    typeof status?.server_address === 'string'
+      ? status.server_address
+      : 'https://supchuang.com'
+  const baseUrl = `${serverAddress.replace(/\/$/, '')}/v1`
+
+  return {
+    baseUrl,
+    systemName:
+      typeof status?.system_name === 'string'
+        ? status.system_name
+        : '中科超创 CoreFusion',
+    quotaPerUnit,
+    currency,
+    uptime: getUptimeDays(status?.start_time),
+    apiInfo,
+    announcements,
+    faq,
+    registerEnabled: status?.register_enabled === true,
+    passwordLoginEnabled: status?.password_login_enabled !== false,
+    legalEnabled:
+      status?.user_agreement_enabled === true &&
+      status?.privacy_policy_enabled === true,
+  }
+}
 
 function Mark({ role = 'brand', className }: { role?: 'brand' | 'icon' | 'console' | 'deco'; className?: string }) {
   if (role === 'deco') {
@@ -139,7 +194,11 @@ function ButtonLink(props: { href: string; children: React.ReactNode; primary?: 
   )
 }
 
-function ConsoleMockup() {
+function ConsoleMockup({
+  live,
+}: {
+  live: ReturnType<typeof buildLiveData>
+}) {
   const nodes = useMemo(
     () =>
       Array.from({ length: 56 }, (_, index) => {
@@ -165,9 +224,9 @@ function ConsoleMockup() {
             <span>网络</span>
           </div>
         </div>
-        <div className='cf-live'>
-          <span className='cf-live-dot' />
-          实时
+          <div className='cf-live'>
+            <span className='cf-live-dot' />
+          /api/status 实时
         </div>
       </div>
       <div className='cf-console-body'>
@@ -184,9 +243,9 @@ function ConsoleMockup() {
             <div className='cf-gauge-label'>集群算力利用率</div>
           </div>
           <div className='cf-kv'>
-            <div className='cf-kv-item'><span className='cf-kv-k'>在线节点</span><span className='cf-kv-v'>312</span></div>
-            <div className='cf-kv-item'><span className='cf-kv-k'>运行任务</span><span className='cf-kv-v c'>48</span></div>
-            <div className='cf-kv-item'><span className='cf-kv-k'>排队任务</span><span className='cf-kv-v b'>6</span></div>
+            <div className='cf-kv-item'><span className='cf-kv-k'>主站 API</span><span className='cf-kv-v'>/v1</span></div>
+            <div className='cf-kv-item'><span className='cf-kv-k'>额度比例</span><span className='cf-kv-v c'>{live.quotaPerUnit.toLocaleString()}</span></div>
+            <div className='cf-kv-item'><span className='cf-kv-k'>运行时间</span><span className='cf-kv-v b'>{live.uptime}</span></div>
           </div>
         </div>
         <div className='cf-console-col'>
@@ -198,7 +257,14 @@ function ConsoleMockup() {
         <div className='cf-console-col queue-col'>
           <div className='cf-col-head'><span className='t'>调度队列</span></div>
           <div className='cf-queue'>
-            {tasks.map(([name, status, state]) => (
+            {(live.apiInfo.length > 0
+              ? live.apiInfo.map((item, index) => [
+                  item.route || `API-${index + 1}`,
+                  item.url || live.baseUrl,
+                  'run',
+                ])
+              : tasks
+            ).map(([name, status, state]) => (
               <div className='cf-task' key={name}>
                 <div className='cf-task-info'><span className={`cf-status-dot cf-${state}`} /><span className='cf-task-name'>{name}</span></div>
                 <span className={`cf-task-state cf-${state}-t`}>{status}</span>
@@ -213,7 +279,15 @@ function ConsoleMockup() {
 
 export function CockpitHome(props: CockpitHomeProps) {
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const { status } = useStatus()
+  const live = useMemo(() => buildLiveData(status), [status])
   const consoleHref = props.isAuthenticated ? '/dashboard' : '/sign-in'
+  const stats = [
+    [`${live.quotaPerUnit.toLocaleString()}`, `1 ${live.currency} 对应额度`],
+    [`${live.apiInfo.length}`, '公开 API 信息'],
+    [`${live.announcements.length}`, '运营公告'],
+    [live.uptime, '系统运行时间'],
+  ]
 
   useEffect(() => {
     document.body.style.overflow = drawerOpen ? 'hidden' : ''
@@ -257,12 +331,12 @@ export function CockpitHome(props: CockpitHomeProps) {
         <section className='cf-section cf-hero cf-wrap'>
           <p className='cf-eyebrow'>CoreFusion™ 智能算力中枢</p>
           <h1>算力调度，<span>尽在掌握</span></h1>
-          <p className='cf-lead'>一张控制台，统一纳管跨云、跨架构的异构算力。实时洞察利用率、节点负载与调度队列，让每一份算力都高效流动。</p>
+          <p className='cf-lead'>一张控制台，统一纳管跨云、跨架构的异构算力。当前主站已接入真实公开配置：{live.baseUrl}，额度比例为 1 {live.currency} = {live.quotaPerUnit.toLocaleString()} quota。</p>
           <div className='cf-actions'>
             <ButtonLink href='#cta' primary>预约演示</ButtonLink>
             <ButtonLink href='#capabilities'>查看产品 ↗</ButtonLink>
           </div>
-          <ConsoleMockup />
+          <ConsoleMockup live={live} />
         </section>
 
         <section className='cf-trust'>
@@ -287,6 +361,43 @@ export function CockpitHome(props: CockpitHomeProps) {
                 <h3>{title}</h3>
                 <p>{desc}</p>
               </article>
+            ))}
+          </div>
+        </section>
+
+        <section className='cf-section cf-wrap' id='live-config'>
+          <p className='cf-eyebrow'>Live Site Data</p>
+          <h2 className='cf-h2'>主站公开配置，直接进入首页</h2>
+          <p className='cf-lead' style={{ marginTop: 18 }}>以下数据来自线上 `/api/status`，用于让官网不只是静态宣发页，而是能展示当前主站配置与运营状态。</p>
+          <div className='cf-live-grid'>
+            <article className='cf-live-card'>
+              <div className='cf-live-label'>API Base URL</div>
+              <div className='cf-live-value'>{live.baseUrl}</div>
+              <p>{live.apiInfo[0]?.description || 'OpenAI 兼容调用入口，供客户和分销商接入。'}</p>
+            </article>
+            <article className='cf-live-card'>
+              <div className='cf-live-label'>Quota</div>
+              <div className='cf-live-value'>1 {live.currency} = {live.quotaPerUnit.toLocaleString()} quota</div>
+              <p>跟随后台运营设置实时展示，便于客户理解充值与消耗换算。</p>
+            </article>
+            <article className='cf-live-card'>
+              <div className='cf-live-label'>Access</div>
+              <div className='cf-live-value'>{live.passwordLoginEnabled ? '密码登录开启' : '密码登录关闭'}</div>
+              <p>{live.registerEnabled ? '公开注册已开启。' : '公开注册未开启，适合人工审核客户和分销商。'}</p>
+            </article>
+            <article className='cf-live-card'>
+              <div className='cf-live-label'>Compliance</div>
+              <div className='cf-live-value'>{live.legalEnabled ? '协议与隐私已开启' : '待完善'}</div>
+              <p>首页同步展示主站合规配置状态，减少上线前人工核对。</p>
+            </article>
+          </div>
+          <div className='cf-live-feed'>
+            {(live.announcements.length > 0 ? live.announcements : [{ content: '暂无公告', extra: live.systemName }]).map((item, index) => (
+              <div className='cf-feed-item' key={`${item.content}-${index}`}>
+                <span>{item.type || 'status'}</span>
+                <strong>{item.content}</strong>
+                <small>{item.extra || item.publishDate || live.systemName}</small>
+              </div>
             ))}
           </div>
         </section>

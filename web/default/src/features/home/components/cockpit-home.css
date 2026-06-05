@@ -828,6 +828,86 @@
   font-size: 13.5px;
 }
 
+.cf-live-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: clamp(34px, 5vw, 52px);
+}
+
+.cf-live-card {
+  background: var(--cf-surface);
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-r-lg);
+  box-shadow: var(--cf-card-shadow);
+  min-width: 0;
+  padding: 24px;
+}
+
+.cf-live-label {
+  color: var(--cf-accent-text);
+  font-family: var(--cf-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cf-live-value {
+  color: var(--cf-heading);
+  font-family: var(--cf-gk);
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 12px;
+  overflow-wrap: anywhere;
+}
+
+.cf-live-card p {
+  color: var(--cf-text-2);
+  font-size: 13.5px;
+  line-height: 1.7;
+  margin: 12px 0 0;
+}
+
+.cf-live-feed {
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-r-lg);
+  margin-top: 18px;
+  overflow: hidden;
+}
+
+.cf-feed-item {
+  align-items: center;
+  background: var(--cf-surface);
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 86px 1fr minmax(120px, 0.5fr);
+  padding: 16px 20px;
+}
+
+.cf-feed-item + .cf-feed-item {
+  border-top: 1px solid var(--cf-border);
+}
+
+.cf-feed-item span {
+  color: var(--cf-accent-text);
+  font-family: var(--cf-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cf-feed-item strong {
+  color: var(--cf-heading);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.cf-feed-item small {
+  color: var(--cf-text-3);
+  font-size: 12px;
+  text-align: right;
+}
+
 .cf-cmp {
   border-collapse: collapse;
   margin-top: clamp(40px, 5vw, 56px);
@@ -1011,6 +1091,19 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  .cf-live-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cf-feed-item {
+    align-items: flex-start;
+    grid-template-columns: 1fr;
+  }
+
+  .cf-feed-item small {
+    text-align: left;
+  }
+
   .cf-layer {
     align-items: flex-start;
     flex-direction: column;
@@ -1040,6 +1133,7 @@
 
 @media (max-width: 560px) {
   .cf-use-grid,
+  .cf-live-grid,
   .cf-footer-top {
     grid-template-columns: 1fr;
   }
