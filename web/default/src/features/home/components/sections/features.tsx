@@ -90,11 +90,11 @@ export function Features(_props: FeaturesProps) {
   return (
     <section className='relative z-10 border-b px-4 py-14 md:px-6 md:py-18'>
       <div className='mx-auto max-w-7xl'>
-        <AnimateInView className='mb-8 max-w-2xl'>
+        <AnimateInView className='mb-8 max-w-5xl'>
           <p className='mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground'>
             {t('Token relay essentials')}
           </p>
-          <h2 className='text-2xl font-semibold tracking-tight md:text-3xl'>
+          <h2 className='text-2xl font-semibold tracking-tight md:whitespace-nowrap md:text-3xl'>
             {t('从 Token 发放、模型分销到消耗结算，都在一个后台里完成')}
           </h2>
         </AnimateInView>
