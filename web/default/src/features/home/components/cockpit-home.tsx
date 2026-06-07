@@ -435,7 +435,7 @@ export function CockpitHome(props: CockpitHomeProps) {
           <div className='cf-hero-grid'>
             <div className='cf-hero-copy'>
               <p className='cf-eyebrow'>COREFUSION MAAS PLATFORM</p>
-              <h1>面向分销与企业客户的 <span>AI 模型服务平台</span></h1>
+              <h1>智能<span>API</span>服务平台</h1>
               <p className='cf-lead'>统一接入模型 API、Token 额度、分销商 OEM、计费倍率与调用审计，把上游模型能力包装成可售卖、可交付、可持续运营的商业化服务。</p>
               <div className='cf-actions'>
                 <ButtonLink href={consoleHref} primary>进入控制台</ButtonLink>
