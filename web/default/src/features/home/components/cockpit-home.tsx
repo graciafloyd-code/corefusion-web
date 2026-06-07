@@ -30,6 +30,7 @@ interface CockpitHomeProps {
 const navItems = [
   { label: '产品矩阵', href: '#products' },
   { label: '模型服务', href: '#capabilities' },
+  { label: '行业方案', href: '#solutions' },
   { label: '分销运营', href: '#live-config' },
   { label: '文档', href: '/docs' },
 ]
@@ -126,20 +127,59 @@ const agentCapabilities = [
   },
 ]
 
+const industrySolutions = [
+  {
+    tag: 'E-COMMERCE',
+    title: '电商客服与售后工单',
+    desc: '把商品知识、订单规则、售后政策和多模型能力接入客服系统，降低人工重复答复压力。',
+    outcome: '适合售前咨询、售后问答、评价回复、工单预处理。',
+  },
+  {
+    tag: 'CONTENT',
+    title: '内容创作与营销素材',
+    desc: '为短视频、图文、电商详情页和社媒运营提供文案生成、改写、翻译和审核能力。',
+    outcome: '适合 MCN、品牌运营、跨境电商和本地生活团队。',
+  },
+  {
+    tag: 'OFFICE',
+    title: '企业知识库与智能办公',
+    desc: '将制度、产品文档、合同模板和项目资料接入知识库，形成可控的企业问答和文档助手。',
+    outcome: '适合行政、人事、销售支持、项目管理和内部培训。',
+  },
+  {
+    tag: 'DATA',
+    title: '数据分析与经营助理',
+    desc: '通过模型 API 连接表格、报表和业务系统，辅助生成分析结论、经营摘要和周报月报。',
+    outcome: '适合运营分析、财务助理、销售复盘和管理驾驶舱。',
+  },
+  {
+    tag: 'EDUCATION',
+    title: '教育培训与题库生成',
+    desc: '围绕课程资料、题库和学习目标，构建讲义生成、练习题生成、批改建议和答疑助手。',
+    outcome: '适合教培机构、企业内训、知识付费和课程团队。',
+  },
+  {
+    tag: 'OEM',
+    title: '经销商 OEM 行业门户',
+    desc: '为代理商快速交付独立品牌首页、接入文档、用户后台和额度计费能力。',
+    outcome: '适合区域代理、行业服务商、软件集成商和渠道团队。',
+  },
+]
+
 const tasks = [
-  ['LLM-Pretrain-32T', '运行中', 'run'],
-  ['AutoDrive-Sim-04K', '运行中', 'run'],
-  ['Quant-RiskCalc-Mega', '排队', 'queued'],
-  ['CV-Finetune-7T', '运行中', 'run'],
-  ['Genome-Align-Cluster', '排队', 'queued'],
+  ['deepseek-v4-pro / reseller-a', '运行中', 'run'],
+  ['qwen-max / enterprise-team', '运行中', 'run'],
+  ['embedding-rag / docs-bot', '排队', 'queued'],
+  ['glm-fast / customer-service', '运行中', 'run'],
+  ['rerank / knowledge-base', '排队', 'queued'],
 ]
 
 const consoleTabs = [
   ['总览', '#top'],
-  ['资源池', '#capabilities'],
+  ['模型网关', '#capabilities'],
+  ['行业方案', '#solutions'],
   ['智能体', '#agents'],
   ['分销运营', '#live-config'],
-  ['文档中心', '/docs'],
 ]
 
 function asArray<T>(value: unknown): T[] {
@@ -274,17 +314,17 @@ function ConsoleMockup({
     []
   )
   const bars = [42, 58, 51, 73, 66, 80, 70, 88, 76, 64, 71, 60]
-  const nodeTotal = 312000
-  const activeNodes = 56000
-  const throughputGrowth = '18,400%'
+  const nodeTotal = 1280000
+  const activeNodes = 842000
+  const throughputGrowth = '42.8%'
 
   return (
-    <div className='cf-console' aria-label='算力调度控制台示意'>
+    <div className='cf-console' aria-label='模型服务运营控制台示意'>
       <div className='cf-console-bar'>
         <div className='cf-console-left'>
           <div className='cf-console-title'>
             <Mark role='console' />
-            <span>算力调度控制台</span>
+            <span>模型服务运营台</span>
           </div>
           <div className='cf-tabs'>
             {consoleTabs.map(([label, href], index) => (
@@ -307,10 +347,10 @@ function ConsoleMockup({
                 <div className='cf-ring-val'>
                   70<small>%</small>
                 </div>
-                <div className='cf-ring-cap'>UTILIZATION</div>
+                <div className='cf-ring-cap'>SUCCESS RATE</div>
               </div>
             </div>
-            <div className='cf-gauge-label'>集群算力利用率</div>
+            <div className='cf-gauge-label'>请求成功率</div>
           </div>
           <div className='cf-kv'>
             <div className='cf-kv-item'><span className='cf-kv-k'>聚合 API</span><span className='cf-kv-v'>1,000+</span></div>
@@ -319,13 +359,13 @@ function ConsoleMockup({
           </div>
         </div>
         <div className='cf-console-col'>
-          <div className='cf-col-head'><span className='t'>资源池 · 节点负载</span><span className='m'>{activeNodes.toLocaleString()} / {nodeTotal.toLocaleString()} nodes</span></div>
+          <div className='cf-col-head'><span className='t'>模型网关 · 请求热力</span><span className='m'>{activeNodes.toLocaleString()} / {nodeTotal.toLocaleString()} tokens</span></div>
           <div className='cf-nodegrid'>{nodes.map((className, index) => <i key={index} className={className} />)}</div>
-          <div className='cf-col-head' style={{ marginTop: 26 }}><span className='t'>24h 吞吐</span><span className='m' style={{ color: 'var(--cf-cyan-bright)', fontFamily: 'var(--cf-gk)', fontWeight: 700 }}>↑ {throughputGrowth}</span></div>
+          <div className='cf-col-head' style={{ marginTop: 26 }}><span className='t'>24h 调用增长</span><span className='m' style={{ color: 'var(--cf-cyan-bright)', fontFamily: 'var(--cf-gk)', fontWeight: 700 }}>↑ {throughputGrowth}</span></div>
           <div className='cf-bars'>{bars.map((height, index) => <i key={index} className={index === 7 ? 'hot' : ''} style={{ height: `${height}%` }} />)}</div>
         </div>
         <div className='cf-console-col queue-col'>
-          <div className='cf-col-head'><span className='t'>调度队列</span></div>
+          <div className='cf-col-head'><span className='t'>实时调用队列</span></div>
           <div className='cf-queue'>
             {tasks.map(([name, status, state]) => (
               <div className='cf-task' key={name}>
@@ -346,10 +386,10 @@ export function CockpitHome(props: CockpitHomeProps) {
   const live = useMemo(() => buildLiveData(status), [status])
   const consoleHref = props.isAuthenticated ? '/dashboard' : '/sign-in'
   const stats = [
-    ['312,000+', '可纳管异构节点'],
     ['1,000+', '模型与接口能力'],
+    ['6类', '行业解决方案'],
+    ['4条', '核心产品线'],
     ['99.9%', '平台服务可用性'],
-    [live.uptime, '系统运行时间'],
   ]
 
   useEffect(() => {
@@ -436,8 +476,8 @@ export function CockpitHome(props: CockpitHomeProps) {
         <section className='cf-trust'>
           <div className='cf-wrap cf-trust-row'>
             <div className='cf-chips'>
-              <span className='cf-chip-label'>兼容主流算力架构</span>
-              {['华为昇腾', '寒武纪', 'NVIDIA'].map((chip) => <span className='cf-chip' key={chip}><span className='cf-chip-dot' />{chip}</span>)}
+              <span className='cf-chip-label'>面向商业化交付</span>
+              {['API 中转', 'OEM 分销', '企业 Agent'].map((chip) => <span className='cf-chip' key={chip}><span className='cf-chip-dot' />{chip}</span>)}
             </div>
             <div className='cf-stats'>{stats.map(([value, label]) => <div className='cf-stat' key={label}><div className='cf-stat-value'>{value}</div><div className='cf-stat-label'>{label}</div></div>)}</div>
           </div>
@@ -478,6 +518,22 @@ export function CockpitHome(props: CockpitHomeProps) {
           </div>
         </section>
 
+        <section className='cf-section cf-wrap' id='solutions'>
+          <p className='cf-eyebrow'>Industry Solutions</p>
+          <h2 className='cf-h2'>把模型能力落到客户看得懂的行业场景</h2>
+          <p className='cf-lead' style={{ marginTop: 18 }}>客户不只关心能调用哪些模型，更关心这些模型能解决什么业务问题。CoreFusion 将 API、知识库、Agent 和计费能力包装成可销售、可复制的行业解决方案。</p>
+          <div className='cf-use-grid'>
+            {industrySolutions.map((item) => (
+              <article className='cf-use-card' key={item.title}>
+                <div className='cf-use-tag'>{item.tag}</div>
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+                <div className='cf-use-outcome'>{item.outcome}</div>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <section className='cf-section cf-wrap' id='agents'>
           <p className='cf-eyebrow'>Skill / Agent Orchestration</p>
           <h2 className='cf-h2'>把模型能力封装为可复用的 Skill 与 Agent 工作流</h2>
@@ -506,8 +562,8 @@ export function CockpitHome(props: CockpitHomeProps) {
 
         <section className='cf-section cf-wrap' id='live-config'>
           <p className='cf-eyebrow'>Operations Console</p>
-          <h2 className='cf-h2'>从资源接入到商业化运营，形成闭环控制面</h2>
-          <p className='cf-lead' style={{ marginTop: 18 }}>平台围绕资源、模型、租户与计费构建统一运营体系，帮助算力供应方把底层资源转化为稳定、可审计、可交付的服务能力。</p>
+          <h2 className='cf-h2'>从模型供货到客户结算，形成闭环控制面</h2>
+          <p className='cf-lead' style={{ marginTop: 18 }}>平台围绕模型、渠道、租户与计费构建统一运营体系，帮助主站把上游模型能力转化为稳定、可审计、可交付的商业服务。</p>
           <div className='cf-live-grid'>
             <article className='cf-live-card'>
               <div className='cf-live-label'>Gateway</div>
@@ -532,24 +588,11 @@ export function CockpitHome(props: CockpitHomeProps) {
           </div>
         </section>
 
-        <section className='cf-section cf-wrap' id='why'>
-          <p className='cf-eyebrow'>Why CoreFusion</p>
-          <h2 className='cf-h2'>为什么是中科超创？</h2>
-          <table className='cf-cmp'>
-            <thead><tr><th>对比维度</th><th>公有云厂商 / 传统软件</th><th className='cf-cmp-col-hi'>CoreFusion™</th></tr></thead>
-            <tbody>
-              <tr><td className='cf-cmp-rowh'>资源中立性</td><td className='cf-cmp-dim'>绑定自有云资源，缺乏跨云调度能力</td><td className='cf-cmp-col-hi cf-cmp-hi'>完全中立，跨云跨架构统一调度，避免厂商锁定</td></tr>
-              <tr><td className='cf-cmp-rowh'>调度策略</td><td className='cf-cmp-dim'>仅关注算力分配，忽视网络状态</td><td className='cf-cmp-col-hi cf-cmp-hi'>独创算网融合调度，网络感知效率最大化</td></tr>
-              <tr><td className='cf-cmp-rowh'>国产适配</td><td className='cf-cmp-dim'>主要适配国际主流芯片</td><td className='cf-cmp-col-hi cf-cmp-hi'>深度适配华为昇腾、寒武纪，信创自主可控</td></tr>
-            </tbody>
-          </table>
-        </section>
-
         <section className='cf-section cf-wrap' id='cta'>
           <div className='cf-cta-band'>
             <Mark role='deco' className='cf-deco' />
-            <h2>让每一份算力，都不再孤岛</h2>
-            <p>预约一次演示，看 CoreFusion™ 如何把您的分散算力汇成统一可调度的超级算力池。</p>
+            <h2>把模型 API 做成可销售、可运营、可分销的服务</h2>
+            <p>预约一次演示，看 CoreFusion™ 如何帮助主站完成模型供货、Token 管理、OEM 分销和行业方案交付。</p>
             <div className='cf-actions'>
               <ButtonLink href={consoleHref} primary>预约演示</ButtonLink>
               <ButtonLink href='/docs'>下载技术白皮书 ↗</ButtonLink>
@@ -561,9 +604,9 @@ export function CockpitHome(props: CockpitHomeProps) {
       <footer className='cf-footer'>
         <div className='cf-wrap'>
           <div className='cf-footer-top'>
-            <div><Brand /><p className='cf-footer-desc'>构筑下一代智能算力网络 · 算网融合 · 中立调度中枢。</p></div>
-            <div className='cf-footer-col'><h4>产品</h4><a href='#capabilities'>算力调度平台</a><a href={consoleHref}>控制台</a><a href='/docs'>开发者 API</a><a href='/pricing'>定价</a></div>
-            <div className='cf-footer-col'><h4>服务</h4><a href='#products'>模型云服务</a><a href='#capabilities'>模型服务网关</a><a href='#live-config'>分销商运营</a><a href='#agents'>企业 Agent</a></div>
+            <div><Brand /><p className='cf-footer-desc'>统一模型 API、Token 额度、OEM 分销与行业智能体交付。</p></div>
+            <div className='cf-footer-col'><h4>产品</h4><a href='#products'>产品矩阵</a><a href={consoleHref}>控制台</a><a href='/docs'>开发者 API</a><a href='/pricing'>定价</a></div>
+            <div className='cf-footer-col'><h4>服务</h4><a href='#capabilities'>模型服务网关</a><a href='#solutions'>行业解决方案</a><a href='#live-config'>分销商运营</a><a href='#agents'>企业 Agent</a></div>
             <div className='cf-footer-col'><h4>公司</h4><a href='/about'>关于我们</a><a href='/docs'>技术博客</a><a href='/docs'>加入我们</a><a href='#cta'>联系销售</a></div>
           </div>
           <div className='cf-footer-bottom'><span>© 2026 中科超创 CoreFusion · 浙江数字内容研究院</span><span className='en'>COREFUSION™ · supchuang.com</span></div>
