@@ -220,6 +220,8 @@ export function UpstreamRatioSync({ modelRatios }: UpstreamRatioSyncProps) {
     onSuccess: () => {
       toast.success(t('Prices synced successfully'))
       queryClient.invalidateQueries({ queryKey: ['system-options'] })
+      queryClient.invalidateQueries({ queryKey: ['pricing'] })
+      queryClient.invalidateQueries({ queryKey: ['aggregation'] })
 
       setDifferences((prevDiffs) => {
         const newDiffs = { ...prevDiffs }

@@ -18,6 +18,7 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import {
   Activity,
+  Gauge,
   Box,
   CreditCard,
   FileText,
@@ -116,6 +117,11 @@ export function useSidebarData(): SidebarData {
         id: 'admin',
         title: t('Admin'),
         items: [
+          {
+            title: '运营中枢',
+            url: '/aggregation',
+            icon: Gauge,
+          },
           {
             title: t('Channels'),
             url: '/channels',

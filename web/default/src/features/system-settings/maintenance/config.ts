@@ -74,6 +74,7 @@ export const SIDEBAR_MODULES_DEFAULT: SidebarModulesAdminConfig = {
   },
   admin: {
     enabled: true,
+    aggregation: true,
     channel: true,
     models: true,
     redemption: true,

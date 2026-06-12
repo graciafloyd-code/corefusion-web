@@ -51,7 +51,6 @@ export function ModelsTable() {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
     description: false,
-    bound_channels: false,
     quota_types: false,
   })
   const [rowSelection, setRowSelection] = useState({})

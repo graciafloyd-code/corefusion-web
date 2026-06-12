@@ -109,6 +109,8 @@ export function Pricing() {
     clearSearch()
   }, [clearFilters, clearSearch])
 
+  const isSearchMode = searchInput.trim().length > 0
+
   const renderPricingContent = () => {
     if (filteredModels.length === 0) {
       return (
@@ -174,7 +176,13 @@ export function Pricing() {
           }}
         />
         <PageTransition className='relative mx-auto w-full max-w-[1800px] px-3 pt-16 pb-8 sm:px-6 sm:pt-20 sm:pb-10 xl:px-8'>
-          <header className='mx-auto mb-5 max-w-3xl pt-5 text-center sm:mb-10 sm:pt-10'>
+          <header
+            className={
+              isSearchMode
+                ? 'mx-auto mb-3 max-w-3xl pt-5 text-center sm:mb-5 sm:pt-8'
+                : 'mx-auto mb-5 max-w-3xl pt-5 text-center sm:mb-10 sm:pt-10'
+            }
+          >
             <p className='text-muted-foreground mb-3 text-xs font-medium tracking-widest uppercase'>
               {t('Model pricing')}
             </p>
@@ -225,10 +233,12 @@ export function Pricing() {
             />
 
             <main className='min-w-0 space-y-4'>
-              <WholesaleProfitTable
-                models={models || []}
-                groupRatio={groupRatio || {}}
-              />
+              {!isSearchMode && (
+                <WholesaleProfitTable
+                  models={models || []}
+                  groupRatio={groupRatio || {}}
+                />
+              )}
 
               <PricingToolbar
                 filteredCount={filteredModels.length}

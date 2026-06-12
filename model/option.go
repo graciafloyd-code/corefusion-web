@@ -215,7 +215,11 @@ func UpdateOption(key string, value string) error {
 	// otherwise it will execute Update (with all fields).
 	DB.Save(&option)
 	// Update OptionMap
-	return updateOptionMap(key, value)
+	err := updateOptionMap(key, value)
+	if err == nil && isPricingOptionKey(key) {
+		InvalidatePricingCache()
+	}
+	return err
 }
 
 // UpdateOptionsBulk persists multiple key/value pairs in a single database
@@ -247,8 +251,30 @@ func UpdateOptionsBulk(values map[string]string) error {
 		if err := updateOptionMap(k, v); err != nil {
 			return err
 		}
+		if isPricingOptionKey(k) {
+			InvalidatePricingCache()
+		}
 	}
 	return nil
+}
+
+func isPricingOptionKey(key string) bool {
+	switch key {
+	case "ModelRatio",
+		"CompletionRatio",
+		"ModelPrice",
+		"CacheRatio",
+		"CreateCacheRatio",
+		"ImageRatio",
+		"AudioRatio",
+		"AudioCompletionRatio",
+		"GroupRatio",
+		"GroupGroupRatio",
+		"UserUsableGroups":
+		return true
+	default:
+		return false
+	}
 }
 
 func updateOptionMap(key string, value string) (err error) {

@@ -327,6 +327,18 @@ func SetApiRouter(router *gin.Engine) {
 			groupRoute.GET("/", controller.GetGroups)
 		}
 
+		aggregationRoute := apiRouter.Group("/aggregation")
+		aggregationRoute.Use(middleware.AdminAuth())
+		{
+			aggregationRoute.GET("/overview", controller.GetAggregationOverview)
+			aggregationRoute.GET("/reports", controller.GetAggregationReports)
+			aggregationRoute.GET("/model-costs", controller.GetAggregationModelCosts)
+			aggregationRoute.PUT("/model-costs", controller.UpdateAggregationModelCosts)
+			aggregationRoute.GET("/model-prices", controller.GetAggregationModelPrices)
+			aggregationRoute.PUT("/model-prices", controller.UpdateAggregationModelPrices)
+			aggregationRoute.POST("/trial-deliveries", controller.CreateAggregationTrialDelivery)
+		}
+
 		prefillGroupRoute := apiRouter.Group("/prefill_group")
 		prefillGroupRoute.Use(middleware.AdminAuth())
 		{

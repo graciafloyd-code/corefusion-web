@@ -112,11 +112,12 @@
 
 .cf-h2 {
   color: var(--cf-heading);
-  font-size: clamp(30px, 4vw, 46px);
+  font-size: clamp(30px, 3.55vw, 44px);
   font-weight: 800;
   line-height: 1.2;
   margin: 14px 0 0;
-  max-width: 840px;
+  max-width: min(1080px, 100%);
+  text-wrap: balance;
 }
 
 .cf-lead {
@@ -261,6 +262,32 @@
   gap: 16px;
 }
 
+.cf-lang-switch {
+  align-items: center;
+  background: var(--cf-surface);
+  border: 1px solid var(--cf-border-2);
+  border-radius: 999px;
+  color: var(--cf-heading);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--cf-gk);
+  font-size: 12px;
+  font-weight: 700;
+  height: 36px;
+  justify-content: center;
+  min-width: 44px;
+  padding: 0 12px;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.cf-lang-switch:hover {
+  background: var(--cf-surface-2);
+  border-color: var(--cf-lblue);
+}
+
 .cf-menu-btn {
   display: none;
 }
@@ -318,6 +345,10 @@
   flex-direction: column;
   gap: 12px;
   margin-top: 30px;
+}
+
+.cf-lang-switch-drawer {
+  width: 100%;
 }
 
 .cf-hero {
@@ -1532,6 +1563,11 @@
 
   .cf-hero h1 {
     font-size: clamp(36px, 10vw, 54px);
+  }
+
+  .cf-h2 {
+    font-size: clamp(28px, 8vw, 40px);
+    max-width: 100%;
   }
 
   .cf-console-bar {

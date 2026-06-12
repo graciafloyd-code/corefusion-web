@@ -31,6 +31,7 @@ import { DataTableColumnHeader } from '@/components/data-table/column-header'
 import { GroupBadge } from '@/components/group-badge'
 import { StatusBadge, StatusBadgeList } from '@/components/status-badge'
 import { TableId } from '@/components/table-id'
+import { CHANNEL_TYPES } from '@/features/channels/constants'
 import {
   getModelStatusConfig,
   getNameRuleConfig,
@@ -72,6 +73,19 @@ export function useModelsColumns(vendors: Vendor[] = []): ColumnDef<Model>[] {
   vendors.forEach((v) => {
     vendorMap[v.id] = v
   })
+  const formatChannelLabel = (channel: {
+    id?: number
+    name: string
+    type?: number
+  }) => {
+    const channelType =
+      channel.type === undefined
+        ? 'Unknown'
+        : CHANNEL_TYPES[channel.type as keyof typeof CHANNEL_TYPES] ||
+          String(channel.type)
+    const channelId = channel.id ? `#${channel.id} ` : ''
+    return `${channelId}${channel.name} · ${channelType}`
+  }
 
   return [
     // Checkbox column
@@ -395,7 +409,7 @@ export function useModelsColumns(vendors: Vendor[] = []): ColumnDef<Model>[] {
         const channelBadges = channels.map((c, idx) => (
           <StatusBadge
             key={idx}
-            label={`${c.name} (${c.type})`}
+            label={formatChannelLabel(c)}
             autoColor={c.name}
             size='sm'
           />

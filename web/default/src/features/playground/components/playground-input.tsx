@@ -67,12 +67,11 @@ interface PlaygroundInputProps {
 }
 
 const suggestions = [
-  { icon: BarChartIcon, text: 'Analyze data', color: '#76d0eb' },
-  { icon: BoxIcon, text: 'Surprise me', color: '#76d0eb' },
-  { icon: NotepadTextIcon, text: 'Summarize text', color: '#ea8444' },
-  { icon: CodeSquareIcon, text: 'Code', color: '#6c71ff' },
-  { icon: GraduationCapIcon, text: 'Get advice', color: '#76d0eb' },
-  { icon: null, text: 'More' },
+  { icon: BarChartIcon, text: '用一句话介绍你的能力', color: '#76d0eb' },
+  { icon: BoxIcon, text: '给我三个企业 API 接入建议', color: '#76d0eb' },
+  { icon: NotepadTextIcon, text: '总结这段文字的核心要点', color: '#ea8444' },
+  { icon: CodeSquareIcon, text: '写一个 JavaScript 请求示例', color: '#6c71ff' },
+  { icon: GraduationCapIcon, text: '说明模型分组和 Token 权限的关系', color: '#76d0eb' },
 ]
 
 export function PlaygroundInput({
@@ -102,8 +101,8 @@ export function PlaygroundInput({
   }
 
   const handleFileAction = (action: string) => {
-    toast.info(t('Feature in development'), {
-      description: action,
+    toast.info('附件能力暂未开通', {
+      description: `当前游乐场用于验证模型文本调用；${action} 将在工具调用阶段接入。`,
     })
   }
 
@@ -173,12 +172,17 @@ export function PlaygroundInput({
             <PromptInputButton
               className='border font-medium'
               disabled={disabled}
-              onClick={() => toast.info(t('Search feature in development'))}
+              onClick={() =>
+                toast.info('实时工具暂未开通', {
+                  description:
+                    '当前游乐场仅验证模型文本调用；天气、联网搜索、知识库和业务工具将在 Agent / Tool 阶段接入。',
+                })
+              }
               variant='outline'
             >
               <GlobeIcon size={16} />
-              <span className='hidden sm:inline'>{t('Search')}</span>
-              <span className='sr-only sm:hidden'>{t('Search')}</span>
+              <span className='hidden sm:inline'>工具未开通</span>
+              <span className='sr-only sm:hidden'>工具未开通</span>
             </PromptInputButton>
           </PromptInputTools>
 
@@ -222,9 +226,7 @@ export function PlaygroundInput({
       <Suggestions>
         {suggestions.map(({ icon: Icon, text, color }) => (
           <Suggestion
-            className={`text-xs font-normal sm:text-sm ${
-              text === 'More' ? 'hidden sm:flex' : ''
-            }`}
+            className='text-xs font-normal sm:text-sm'
             key={text}
             onClick={() => handleSuggestionClick(text)}
             suggestion={text}

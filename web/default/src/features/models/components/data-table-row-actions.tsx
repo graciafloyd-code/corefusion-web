@@ -51,6 +51,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false)
 
   const isEnabled = isModelEnabled(model)
+  const isVirtualChannelModel = model.id < 0
 
   const handleEdit = () => {
     setCurrentRow(model)
@@ -75,6 +76,12 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
         <span className='sr-only'>{t('Open menu')}</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='w-48'>
+        {isVirtualChannelModel ? (
+          <DropdownMenuItem disabled>
+            {t('Channel synced model')}
+          </DropdownMenuItem>
+        ) : (
+          <>
         {/* Edit */}
         <DropdownMenuItem onClick={handleEdit}>
           {t('Edit')}
@@ -119,6 +126,8 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
             <Trash2 size={16} />
           </DropdownMenuShortcut>
         </DropdownMenuItem>
+          </>
+        )}
       </DropdownMenuContent>
 
       <ConfirmDialog

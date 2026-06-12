@@ -1,6 +1,7 @@
 package model
 
 import (
+	"hash/crc32"
 	"strconv"
 	"strings"
 
@@ -17,8 +18,10 @@ const (
 )
 
 type BoundChannel struct {
-	Name string `json:"name"`
-	Type int    `json:"type"`
+	Id     int    `json:"id"`
+	Name   string `json:"name"`
+	Type   int    `json:"type"`
+	Status int    `json:"status"`
 }
 
 type Model struct {
@@ -116,13 +119,15 @@ func GetBoundChannelsByModelsMap(modelNames []string) (map[string][]BoundChannel
 		return result, nil
 	}
 	type row struct {
-		Model string
-		Name  string
-		Type  int
+		Model  string
+		Id     int
+		Name   string
+		Type   int
+		Status int
 	}
 	var rows []row
 	err := DB.Table("channels").
-		Select("abilities.model as model, channels.name as name, channels.type as type").
+		Select("abilities.model as model, channels.id as id, channels.name as name, channels.type as type, channels.status as status").
 		Joins("JOIN abilities ON abilities.channel_id = channels.id").
 		Where("abilities.model IN ? AND abilities.enabled = ?", modelNames, true).
 		Distinct().
@@ -131,7 +136,7 @@ func GetBoundChannelsByModelsMap(modelNames []string) (map[string][]BoundChannel
 		return nil, err
 	}
 	for _, r := range rows {
-		result[r.Model] = append(result[r.Model], BoundChannel{Name: r.Name, Type: r.Type})
+		result[r.Model] = append(result[r.Model], BoundChannel{Id: r.Id, Name: r.Name, Type: r.Type, Status: r.Status})
 	}
 	return result, nil
 }
@@ -212,6 +217,78 @@ func SearchModels(keyword string, vendor string, offset int, limit int) ([]*Mode
 	}
 	if err := db.Order("models.id DESC").Offset(offset).Limit(limit).Find(&models).Error; err != nil {
 		return nil, 0, err
+	}
+	if keyword == "" || len(models) >= limit {
+		return models, total, nil
+	}
+	excludedNames := make(map[string]struct{}, len(models))
+	for _, m := range models {
+		if m != nil && m.ModelName != "" {
+			excludedNames[m.ModelName] = struct{}{}
+		}
+	}
+	fallbackOffset := 0
+	if offset > int(total) {
+		fallbackOffset = offset - int(total)
+	}
+	fallbackModels, fallbackTotal, err := SearchEnabledAbilityModels(keyword, excludedNames, fallbackOffset, limit-len(models))
+	if err != nil {
+		return nil, 0, err
+	}
+	models = append(models, fallbackModels...)
+	total += fallbackTotal
+	return models, total, nil
+}
+
+func SearchEnabledAbilityModels(keyword string, excludedNames map[string]struct{}, offset int, limit int) ([]*Model, int64, error) {
+	keyword = strings.TrimSpace(keyword)
+	if keyword == "" || limit <= 0 {
+		return []*Model{}, 0, nil
+	}
+	like := "%" + keyword + "%"
+	var names []string
+	if err := DB.Table("abilities").
+		Joins("JOIN channels ON channels.id = abilities.channel_id").
+		Where("abilities.enabled = ? AND channels.status = ? AND abilities.model LIKE ?", true, common.ChannelStatusEnabled, like).
+		Distinct("abilities.model").
+		Order("abilities.model ASC").
+		Pluck("abilities.model", &names).Error; err != nil {
+		return nil, 0, err
+	}
+
+	filtered := make([]string, 0, len(names))
+	for _, name := range names {
+		name = strings.TrimSpace(name)
+		if name == "" {
+			continue
+		}
+		if _, ok := excludedNames[name]; ok {
+			continue
+		}
+		filtered = append(filtered, name)
+	}
+	total := int64(len(filtered))
+	if offset >= len(filtered) {
+		return []*Model{}, total, nil
+	}
+	end := offset + limit
+	if end > len(filtered) {
+		end = len(filtered)
+	}
+
+	models := make([]*Model, 0, end-offset)
+	for _, name := range filtered[offset:end] {
+		models = append(models, &Model{
+			Id:           -int(crc32.ChecksumIEEE([]byte(name))),
+			ModelName:    name,
+			Description:  "来自已启用渠道的模型；尚未写入模型元数据，可通过缺失模型同步补全。",
+			Tags:         "渠道同步,待补全元数据",
+			Status:       1,
+			SyncOfficial: 0,
+			NameRule:     NameRuleExact,
+			CreatedTime:  common.GetTimestamp(),
+			UpdatedTime:  common.GetTimestamp(),
+		})
 	}
 	return models, total, nil
 }

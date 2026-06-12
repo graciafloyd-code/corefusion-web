@@ -126,6 +126,10 @@ export function SidebarModulesSection({
       },
     },
     admin: {
+      aggregation: {
+        title: '运营中枢',
+        description: t('Operational reports, delivery checks, and pricing control.'),
+      },
       channel: {
         title: t('Channels'),
         description: t('Configure upstream providers and routing.'),

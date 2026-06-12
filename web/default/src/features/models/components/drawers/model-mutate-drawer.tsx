@@ -602,6 +602,7 @@ export function ModelMutateDrawer({
           )
           queryClient.invalidateQueries({ queryKey: modelsQueryKeys.lists() })
           queryClient.invalidateQueries({ queryKey: ['system-options'] })
+          queryClient.invalidateQueries({ queryKey: ['pricing'] })
           onOpenChange(false)
         } else {
           toast.error(response.message || 'Operation failed')
